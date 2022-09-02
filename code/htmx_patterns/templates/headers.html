@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block body %}
+  <h1>Headers demo</h1>
+
+  <p>
+    <a href="" hx-get="." hx-target="#container" hx-swap="beforeend">Get some more HTML via HTMX</a>
+  </p>
+  <p id="container"></p>
+
+{% endblock %}

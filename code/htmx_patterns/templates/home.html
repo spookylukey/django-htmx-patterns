@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block body %}
+  <h1>Django HTMX patterns home page</h1>
+  <ul>
+    <li><a href="{% url 'headers_demo' %}">headers_demo</a></li>
+    <li><a href="{% url 'simple_post_form' %}">HTMX post using form</a></li>
+    <li><a href="{% url 'post_without_form' %}">HTMX post without form</a></li>
+  </ul>
+{% endblock %}
