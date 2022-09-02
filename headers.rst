@@ -3,7 +3,8 @@ Headers
 
 The headers sent by HTMX are documented `here <https://htmx.org/reference/#request_headers>`_.
 
-Here’s how you access them in Django:
+Here’s how you access them in Django, in a view that behaves different for HTMX
+requests compared to normal requests:
 
 
 .. code-block:: python

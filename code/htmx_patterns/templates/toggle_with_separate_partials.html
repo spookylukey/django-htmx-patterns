@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h1>Are the monsters happy or sad?</h1>
+
+  {% for monster in monsters %}
+    {% include "_toggle_item_partial.html" %}
+  {% endfor %}
+
+{% endblock %}

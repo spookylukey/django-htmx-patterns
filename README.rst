@@ -24,7 +24,7 @@ for the sake of clarity.
 * `Base template </base_template.rst>`_
 * `Headers </headers.rst>`_
 * `Post requests </posts.rst>`_
-* `Partials using separate templates </separate_partials.rst>`_  TODO
+* `Partials using separate templates </separate_partials.rst>`_
 * `Partials using inline template </inline_partials.rst>`_  TODO
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
