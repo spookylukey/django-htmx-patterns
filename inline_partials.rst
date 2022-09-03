@@ -112,3 +112,8 @@ decorator takes an extra ``if_hx_target`` keyword arguments for that e.g.:
 
 
 This approach can be extended with other functionality, depending on your use cases.
+
+
+Full code: `view <./code/htmx_patterns/views/partials.py>`_, `template
+<./code/htmx_patterns/templates/paging_with_inline_partials.html>`_, `decorator
+<./code/htmx_patterns/utils.py>`_.

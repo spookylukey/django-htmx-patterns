@@ -23,13 +23,13 @@ there are even more. To see and extract good HTMX patterns, you need:
 Using CBVs will seriously hinder you in both these.
 
 In my experience so far, the best patterns for using HTMX are likely to be
-project specific. In addition, while both Django and HTMX are mature, the code
-interfacing between them is pretty immature, and the best patterns have probably
-not surfaced yet. So for now I’m suggesting that if you like anything you see in
+project specific. In addition, while both Django and HTMX are mature, the best
+patterns to use for the combination of these two is still an area for growth and
+needs refining. So for now I’m suggesting that if you like anything you see in
 this repo, you should:
 
 * copy-paste it freely into your project (the code is in public domain)
-* iterate on it (and discard it if it gets in your way)
+* improve on it (and discard it if it gets in your way)
 * if you want, share your improvements or alternatives back here.
 
 But don’t ask me to release this code as a library, and I suggest you shouldn’t
