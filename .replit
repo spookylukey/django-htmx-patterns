@@ -25,14 +25,13 @@ syntax = "python"
   [languages.python3.languageServer]
   start = ["pyls"]
 
-# The environment variables needed to correctly start Python and use the
-# package proxy.
 [env]
 VIRTUAL_ENV = "/home/runner/${REPL_SLUG}/venv"
 PATH = "${VIRTUAL_ENV}/bin"
-PYTHONPATH="${VIRTUAL_ENV}/lib/python3.10/site-packages"
-REPLIT_POETRY_PYPI_REPOSITORY="https://package-proxy.replit.com/pypi/"
-MPLBACKEND="TkAgg"
+PYTHONPATH = "${VIRTUAL_ENV}/lib/python3.10/site-packages"
+REPLIT_POETRY_PYPI_REPOSITORY = "https://package-proxy.replit.com/pypi/"
+MPLBACKEND = "TkAgg"
+POETRY_CACHE_DIR = "${HOME}/${REPL_SLUG}/.cache/pypoetry"
 
 # Enable unit tests. This is only supported for a few languages.
 [unitTest]
