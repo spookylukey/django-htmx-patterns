@@ -2,7 +2,7 @@ Separate partials with a single view
 ====================================
 
 In contrast to the `first example <separate_partials.rst>`_, sometimes it’s most
-convenient to use a single view for both the full and the HTMX view when using
+convenient to use a single view for both the full and the htmx view when using
 partials. A common example is paginated views.
 
 Here, we typically want to display “more items”, loading more down the page, or
@@ -96,4 +96,4 @@ wraps up the logic for us - see `implementation
 
 This decorator has some other tricks — it can match on specific ``Hx-Target``
 headers to choose different templates, which can useful if you are doing more
-advanced things, like both HTMX search and paging in the same view.
+advanced things, like both htmx search and paging in the same view.

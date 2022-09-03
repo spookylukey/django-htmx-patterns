@@ -1,9 +1,9 @@
-Django + HTMX patterns
+Django + htmx patterns
 ======================
 
 This repo is a rough-and-ready compilation of the patterns I’m using and
 developing when writing `Django <https://www.djangoproject.com/>`_ projects that
-use `HTMX <https://htmx.org/>`_.
+use `htmx <https://htmx.org/>`_.
 
 The docs are intended to be viewed on GitHub: https://github.com/spookylukey/django-htmx-patterns/ and the code can be run locally or on repl.it (see below)
 
@@ -12,7 +12,7 @@ My aims are to document and share:
 1. The basic patterns and control flow needed
 2. Some enhancements we can make with a few utilities
 
-The code presented depends only on Django and HTMX, unless otherwise noted. I
+The code presented depends only on Django and htmx, unless otherwise noted. I
 wont be packaging it up as a library. It is instead being released into the
 public domain, and you are encouraged to copy-paste it for your own needs. (See
 the “Approach” docs for why).
@@ -55,7 +55,6 @@ Links
 
 Some other good resources:
 
-* `django-htmx-fun <https://github.com/guettli/django-htmx-fun>`_ - example application with Django/HTMX
+* `How to use htmx in Django <https://www.mattlayman.com/blog/2021/how-to-htmx-django/>`_ - tutorial blog post
 * `django-htmx <https://github.com/adamchainz/django-htmx>`_ - utility library with helpful docs
-
-
+* `django-htmx-fun <https://github.com/guettli/django-htmx-fun>`_ - example application with Django/htmx

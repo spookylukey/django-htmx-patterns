@@ -37,7 +37,7 @@ the POST request doesn’t return a full page.
 
 However, in many cases it will be inconvenient to use a form, or you may want to
 use controls that wouldn’t normally submit other values, such as links. An easy
-solution is to put the token into custom HTMX headers, by adding ``hx-headers``
+solution is to put the token into custom htmx headers, by adding ``hx-headers``
 into the ``<body>`` element, usually in a ``base.html`` template:
 
 .. code-block::

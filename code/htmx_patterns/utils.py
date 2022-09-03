@@ -9,7 +9,7 @@ from render_block import render_block_to_string
 # - typing. You could use type hints and static typing checks to ensure that is only used
 #   on view functions that return TemplateResponse
 
-# - different ways of matching HTMX requests, if needed.
+# - different ways of matching htmx requests, if needed.
 
 
 def for_htmx(*, if_hx_target: str | None = None, template: str | None = None, block: str | None = None):

@@ -8,7 +8,7 @@ Having partial templates in separate files makes the logic harder to follow.
 Thanks to `django-render-block
 <https://github.com/clokep/django-render-block>`_, however, instead of an
 include and separate files, we can put the partials into named blocks within the
-main template, and then just render that block if we have an HTMX request.
+main template, and then just render that block if we have an htmx request.
 
 In our example, as before, we have a paged list of objects (monsters, in this
 case), with a “load more” style paging control at the end. When the button is
@@ -51,7 +51,7 @@ So our template looks like this:
    {% endblock %}
 
 
-For HTMX requests we must pull out the ``page-and-paging-controls`` block and
+For htmx requests we must pull out the ``page-and-paging-controls`` block and
 render just that bit. So, the long version of our view code looks like this:
 
 
@@ -79,7 +79,7 @@ render just that bit. So, the long version of our view code looks like this:
 
 However, thanks to the fact that ``TemplateResponse`` doesn’t immediately render
 itself, but just stores the template and context to be rendered later, we can
-instead implement all the logic relating to HTMX and ``render_block_to_string``
+instead implement all the logic relating to htmx and ``render_block_to_string``
 using a `decorator <./code/htmx_patterns/utils.py>`_, which I’m calling
 ``for_htmx``.
 
@@ -97,8 +97,8 @@ Now our view code is now both more readable and much shorter, like this:
            },
        )
 
-For some cases where I’m doing different HTMX calls within the same page (e.g. a
-page that uses HTMX for both search and paging), I’ve found that I need to
+For some cases where I’m doing different htmx calls within the same page (e.g. a
+page that uses htmx for both search and paging), I’ve found that I need to
 choose the block based on the ``Hx-Target`` header. So the ``for_htmx``
 decorator takes an extra ``if_hx_target`` keyword arguments for that e.g.:
 

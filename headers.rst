@@ -1,9 +1,9 @@
 Headers
 =======
 
-The headers sent by HTMX are documented `here <https://htmx.org/reference/#request_headers>`_.
+The headers sent by htmx are documented `here <https://htmx.org/reference/#request_headers>`_.
 
-Here’s how you access them in Django, in a view that behaves different for HTMX
+Here’s how you access them in Django, in a view that behaves different for htmx
 requests compared to normal requests:
 
 
@@ -12,7 +12,7 @@ requests compared to normal requests:
    def headers_demo(request):
        if request.headers.get("Hx-Request", False):
            current_url = request.headers["HX-Current-URL"]
-           return HttpResponse(f"This is a response to a request sent by HTMX from {current_url}<br>")
+           return HttpResponse(f"This is a response to a request sent by htmx from {current_url}<br>")
 
        return TemplateResponse(request, "headers.html", {})
 

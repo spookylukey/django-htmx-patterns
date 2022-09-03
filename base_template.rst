@@ -1,7 +1,7 @@
 Base template
 =============
 
-To get going, you’ll need to install HTMX somehow into you template.
+To get going, you’ll need to install htmx somehow into you template.
 
 Most likely, you’ll want to put it into a base template. There are lots of
 options for the exact details of how to do this in Django (depending on if you
@@ -19,7 +19,7 @@ Using the CDN:
        ...
 
 
-(You should specify the version you want, see `HTMX installation docs <https://htmx.org/docs/#installing>`_)
+(You should specify the version you want, see `htmx installation docs <https://htmx.org/docs/#installing>`_)
 
 Download into one of your folders for `static assets in your Django projects
 <https://docs.djangoproject.com/en/stable/howto/static-files/>`_, and use like

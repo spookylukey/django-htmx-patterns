@@ -1,7 +1,7 @@
 Separate partial templates
 ==========================
 
-Often when using HTMX, you will want responses to HTMX requests to be “partial
+Often when using htmx, you will want responses to htmx requests to be “partial
 templates” i.e. HTML fragments from a large page. The simplest way to do this in
 Django is to:
 
@@ -9,7 +9,7 @@ Django is to:
 2. use an `include
    <`https://docs.djangoproject.com/en/stable/ref/templates/builtins/#include>`_
    in the parent template
-3. respond to the HTMX request by using the partial template only.
+3. respond to the htmx request by using the partial template only.
 
 
 The below example is for a page that allows us to individually toggle the state

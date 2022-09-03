@@ -3,7 +3,7 @@ Approach
 
 The approach I recommend is:
 
-1. Read the `HTMX docs <https://htmx.org/docs/>`_
+1. Read the `htmx docs <https://htmx.org/docs/>`_
 2. Work out the simplest way of applying the flow control and changes necessary in a Django view.
 3. After you have done step 2 **at least 3 or 4 times**, look for nicer patterns
    or abstractions.
@@ -14,16 +14,16 @@ statements etc until you know you have something better.
 I also strongly recommend starting from **function based views**, and not class
 based views. There are `many excellent reasons to always use function based
 views <https://spookylukey.github.io/django-views-the-right-way/>`_, especially
-when we are talking about views that are generating HTML, but if you are doing HTMX
-there are even more. To see and extract good HTMX patterns, you need:
+when we are talking about views that are generating HTML, but if you are doing htmx
+there are even more. To see and extract good htmx patterns, you need:
 
 1. To be able see the complete control flow
 2. To be able to re-arrange the control flow
 
 Using CBVs will seriously hinder you in both these.
 
-In my experience so far, the best patterns for using HTMX are likely to be
-project specific. In addition, while both Django and HTMX are mature, the best
+In my experience so far, the best patterns for using htmx are likely to be
+project specific. In addition, while both Django and htmx are mature, the best
 patterns to use for the combination of these two is still an area for growth and
 needs refining. So for now I’m suggesting that if you like anything you see in
 this repo, you should:
