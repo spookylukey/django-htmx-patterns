@@ -12,3 +12,16 @@ version = "0.1.0"
 Django = "^4.0"
 python = "^3.10"
 [tool.poetry.dev-dependencies]
+
+
+[tool.black]
+line-length = 120
+# required-version = '22.1.0' # see https://github.com/psf/black/issues/2493
+target-version = ['py310']
+
+
+[tool.isort]
+line_length = 120
+profile = "black"
+multi_line_output = 3
+skip = ['settings.py', 'node_modules', '.git', 'venv']
