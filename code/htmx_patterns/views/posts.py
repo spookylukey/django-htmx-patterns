@@ -17,4 +17,6 @@ def post_without_form(request):
 @require_POST
 def post_form_endpoint(request):
     monsters = make_monsters(int(request.POST.get("howmany", "1")))
+    # Unlike the normal POST/redirect/GET pattern, we can directly return
+    # a partial, becasuse there is no problem with page refresh or back button
     return HttpResponse("".join(format_html("Created {0}<br>", monster.name) for monster in monsters))

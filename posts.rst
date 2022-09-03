@@ -30,6 +30,10 @@ will have no problems.
 
 Example `view code <./code/htmx_patterns/views/posts.py>`_, `template <./code/htmx_patterns/templates/simple_post_form.html>`__
 
+Note that the normal pattern of `POST/redirect/GET
+<https://en.wikipedia.org/wiki/Post/Redirect/Get>`_, which is needed to avoid
+problems with page refresh and form re-submission, is not needed in this case as
+the POST request doesn’t return a full page.
 
 However, in many cases it will be inconvenient to use a form, or you may want to
 use controls that wouldn’t normally submit other values, such as links. An easy
