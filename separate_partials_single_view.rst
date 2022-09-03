@@ -84,7 +84,7 @@ wraps up the logic for us - see `implementation
 .. code-block:: python
 
    @for_htmx(template="_page_and_paging_controls.html")
-   def paging_with_separate_partials_2(request):
+   def paging_with_separate_partials_improved(request):
        return TemplateResponse(
            request,
            "paging_with_separate_partials.html",

@@ -1,0 +1,114 @@
+Inline partials
+===============
+
+This improves on the patterns used for `a single view with
+separate partial files <./separate_partials_single_view.st>`_.
+
+Having partial template in a separate file makes the logic harder to follow.
+Thanks to `django-render-block
+<https://github.com/clokep/django-render-block>`_, however, instead of an
+include and a separate file, we can put the partials into a named block in their
+original location, and then just render that block for the HTMX request.
+
+In our example, as before, we have a paged list of objects (monsters, in this
+case), with a “load more” style paging control at the end. When pressed, this
+will replace the paging controls with the next page plus the next paging
+controls.
+
+So our template looks like this:
+
+.. code-block:: html+django
+
+   {% extends "base.html" %}
+
+   {% block body %}
+     <h1>List of monsters</h1>
+
+     {% if page_obj.paginator.count == 0 %}
+       <p>We have no monsters!</p>
+     {% else %}
+
+       {% block page-and-paging-controls %}
+         {% for monster in page_obj %}
+           <p class="card">{{ monster.name }}</p>
+         {% endfor %}
+
+         {% if page_obj.has_next %}
+           <p id="paging-area">
+             <a href="?page={{ page_obj.next_page_number }}"
+               hx-get="?page={{ page_obj.next_page_number }}"
+               hx-target="#paging-area"
+               hx-swap="outerHTML"
+             >Load more</a>
+           </p>
+         {% else %}
+           <p>That's all of them!</p>
+         {% endif %}
+       {% endblock %}
+
+     {% endif %}
+
+   {% endblock %}
+
+
+For HTMX requests we must pull out the ``page-and-paging-controls`` block and
+render just that bit. So, the long version of our view code looks like this:
+
+
+.. code-block:: python
+
+   from render_block import render_block_to_string
+
+   def paging_with_inline_partials(request):
+       template_name = "paging_with_inline_partials.html"
+       context = {
+           "page_obj": get_page_by_request(request, Monster.objects.all()),
+       }
+
+       if request.headers.get("Hx-Request", False):
+           rendered_block = render_block_to_string(
+               template_name, "page-and-paging-controls", context=context, request=request
+           )
+           # Create new simple HttpResponse as replacement
+           return HttpResponse(content=rendered_block)
+
+       return TemplateResponse(
+           request,
+           template_name,
+           context,
+       )
+
+However, thanks to the fact that ``TemplateResponse`` doesn’t immediately render
+itself, we can instead implement all the logic relating to HTMX and
+``render_block_to_string`` using a `decorator <./code/htmx_patterns/utils.py>`_,
+which I’m calling ``for_htmx``.
+
+Now our view code is now both more readable and much shorter, like this:
+
+.. code-block:: python
+
+   @for_htmx(block="page-and-paging-controls")
+   def paging_with_inline_partials_improved(request):
+       return TemplateResponse(
+           request,
+           "paging_with_inline_partials.html",
+           {
+               "page_obj": get_page_by_request(request, Monster.objects.all()),
+           },
+       )
+
+For some cases where I’m doing different HTMX calls within the same page (e.g. a
+page that has both HTMX-based search and paging), I’ve found that I need to
+choose the block based on the ``Hx-Target`` header. So the ``for_htmx``
+decorator takes an extra ``if_hx_target`` keyword arguments for that e.g.:
+
+
+.. code-block:: python
+
+   @for_htmx(if_hx_target="search-results", block="search-result-block")
+   @for_htmx(if_hx_target="paging-controls", block="page-and-paging-controls")
+   def my_view(request):
+       ...
+
+
+This approach can be extended with other needs, depending on your use cases.

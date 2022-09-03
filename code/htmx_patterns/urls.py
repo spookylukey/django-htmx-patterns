@@ -18,9 +18,19 @@ urlpatterns = [
         "paging-with-separate-partials/", partials.paging_with_separate_partials, name="paging_with_separate_partials"
     ),
     path(
-        "paging-with-separate-partials-2/",
-        partials.paging_with_separate_partials_2,
-        name="paging_with_separate_partials_2",
+        "paging-with-separate-partials-improved/",
+        partials.paging_with_separate_partials_improved,
+        name="paging_with_separate_partials_improved",
+    ),
+    path(
+        "paging-with-inline-partials/",
+        partials.paging_with_inline_partials,
+        name="paging_with_inline_partials",
+    ),
+    path(
+        "paging-with-inline-partials-improved/",
+        partials.paging_with_inline_partials_improved,
+        name="paging_with_inline_partials_improved",
     ),
     path("admin/", admin.site.urls),
 ]
