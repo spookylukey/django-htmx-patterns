@@ -2,16 +2,25 @@ from django.http.response import HttpResponse
 from django.utils.functional import wraps
 from render_block import render_block_to_string
 
-
 # This decorator combines a bunch of functionality, which you might not need all of!
+
+# Future work for this decorator:
+
+# - typing. You could use type hints and static typing checks to ensure that is only used
+#   on view functions that return TemplateResponse
+
+# - different ways of matching HTMX requests, if needed.
+
+
 def for_htmx(*, if_hx_target: str | None = None, template: str | None = None, block: str | None = None):
     """
     If the request is from htmx, then render a partial page, using either:
     - the supplied template name.
     - the specified block name
 
-    If the optional `if_target` parameter is supplied, the
-    hx-target header must match the supplied value as well.
+    If the optional `if_hx_target` parameter is supplied, the
+    hx-target header must match the supplied value as well in order
+    for this decorator to be applied.
     """
     if block and template:
         raise ValueError("Pass only one of 'template' and 'block'")

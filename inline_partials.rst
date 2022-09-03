@@ -117,3 +117,20 @@ This approach can be extended with other functionality, depending on your use ca
 Full code: `view <./code/htmx_patterns/views/partials.py>`_, `template
 <./code/htmx_patterns/templates/paging_with_inline_partials.html>`_, `decorator
 <./code/htmx_patterns/utils.py>`_.
+
+Caveats and future work
+-----------------------
+
+One effect of this pattern is that it turns your un-rendered `TemplateResponse
+<https://docs.djangoproject.com/en/stable/ref/template-response/>`_ into a normal
+`HttpResponse
+<https://docs.djangoproject.com/en/stable/ref/request-response/#django.http.HttpResponse>`_.
+This has consequences for any code later on (like other decorators or
+middleware) that expect a ``TemplateResponse``, and any “post render callbacks”
+attached to the ``TemplateResponse``, which now won’t be called. You should
+check this isn’t an issue in your case.
+
+Alternatively, perhaps this pattern could be extended by inventing a
+``TemplateBlockResponse`` which is lazily rendered in the same way as
+``TemplateResponse``. It will need to present the same interface, with methods
+like ``render()`` etc.
