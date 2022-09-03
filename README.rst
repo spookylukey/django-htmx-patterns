@@ -31,3 +31,20 @@ for the sake of clarity.
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 
 Full Django project demoing code examples is in the `code folder <./code/>`_.
+
+
+TODO
+----
+
+* Combined vs separate view functions
+* Patterns for use with `django-functest
+  <https://django-functest.readthedocs.io/en/latest/>`_
+
+
+Links
+-----
+
+Some other good resources:
+
+* `django-htmx-fun <https://github.com/guettli/django-htmx-fun>`_ - example application with Django/HTMX
+* `django-htmx <https://github.com/adamchainz/django-htmx>`_ - utility library with helpful docs
