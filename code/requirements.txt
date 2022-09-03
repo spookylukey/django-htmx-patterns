@@ -1,3 +1,4 @@
 Django>=4.1
+django-render-block
 Faker>=14
 IPython

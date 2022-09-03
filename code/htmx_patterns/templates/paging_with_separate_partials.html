@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h1>List of monsters</h1>
+
+  {% if page_obj.paginator.count == 0 %}
+    <p>We have no monsters!</p>
+  {% else %}
+    {% include "_page_and_paging_controls.html" %}
+  {% endif %}
+
+{% endblock %}
