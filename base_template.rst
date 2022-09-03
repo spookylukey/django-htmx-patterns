@@ -36,3 +36,6 @@ this in your ``base.html``.
 
 
 Example `template <./code/htmx_patterns/templates/base.html>`_
+
+You should also see the notes about `post requests <./posts.rst>`_ for things
+you might want in your base templates.

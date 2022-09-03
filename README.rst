@@ -20,13 +20,13 @@ mentioned here, such as `django-htmx
 <https://github.com/adamchainz/django-htmx>`_, but I won’t be using any of them
 for the sake of clarity.
 
-* `Approach </approach.rst>`_
-* `Base template </base_template.rst>`_
-* `Headers </headers.rst>`_
-* `Post requests </posts.rst>`_
-* `Partials using separate templates </separate_partials.rst>`_
-* `Separate partials with a single view </separate_partials_single_view.rst>`_
-* `Partials using inline template </inline_partials.rst>`_  TODO
+* `Approach <./approach.rst>`_
+* `Base template <./base_template.rst>`_
+* `Headers <./headers.rst>`_
+* `Post requests <./posts.rst>`_
+* `Partials using separate templates <./separate_partials.rst>`_
+* `Separate partials with a single view <./separate_partials_single_view.rst>`_
+* `Partials using inline template <./inline_partials.rst>`_  TODO
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 

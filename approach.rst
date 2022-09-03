@@ -14,7 +14,7 @@ statements etc until you know you have something better.
 I also strongly recommend starting from **function based views**, and not class
 based views. There are `many excellent reasons to always use function based
 views <https://spookylukey.github.io/django-views-the-right-way/>`_, especially
-when we are talking about views that generating HTML, but if you are doing HTMX
+when we are talking about views that are generating HTML, but if you are doing HTMX
 there are even more. To see and extract good HTMX patterns, you need:
 
 1. To be able see the complete control flow
@@ -25,12 +25,12 @@ Using CBVs will seriously hinder you in both these.
 In my experience so far, the best patterns for using HTMX are likely to be
 project specific. In addition, while both Django and HTMX are mature, the code
 interfacing between them is pretty immature, and the best patterns have probably
-not surfaced yet. So the approach I’m advocating is that if you like anything
-you see in this repo, you should:
+not surfaced yet. So for now I’m suggesting that if you like anything you see in
+this repo, you should:
 
-* copy-paste it freely into your project
+* copy-paste it freely into your project (the code is in public domain)
 * iterate on it (and discard it if it gets in your way)
-* if you want, share your improvements or alternatives back here,
+* if you want, share your improvements or alternatives back here.
 
-But, don’t ask me to release this code as a library, and I suggest you don’t
+But don’t ask me to release this code as a library, and I suggest you shouldn’t
 either (at least not yet).
