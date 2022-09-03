@@ -26,7 +26,7 @@ for the sake of clarity.
 * `Post requests <./posts.rst>`_
 * `Partials using separate templates <./separate_partials.rst>`_
 * `Separate partials with a single view <./separate_partials_single_view.rst>`_
-* `Partials using inline template <./inline_partials.rst>`_  TODO
+* `Inline partials <./inline_partials.rst>`_
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 
