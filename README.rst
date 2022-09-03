@@ -41,6 +41,13 @@ TODO
   <https://django-functest.readthedocs.io/en/latest/>`_
 
 
+Code folder
+-----------
+
+In the code folder is a demo app which has full working examples of everything in the docs. You can see it live on `repl.it <https://replit.com/>`_ at https://django-htmx-patterns.spookylukey1.repl.co where you can also fork it to play around with the code.
+
+To install locally, use a virtualenv, and then either use poetry or see the code/requirements.txt file for pip.
+
 Links
 -----
 
@@ -48,3 +55,5 @@ Some other good resources:
 
 * `django-htmx-fun <https://github.com/guettli/django-htmx-fun>`_ - example application with Django/HTMX
 * `django-htmx <https://github.com/adamchainz/django-htmx>`_ - utility library with helpful docs
+
+
