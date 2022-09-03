@@ -7,8 +7,8 @@ separate partial files <./separate_partials_single_view.st>`_.
 Having partial templates in separate files makes the logic harder to follow.
 Thanks to `django-render-block
 <https://github.com/clokep/django-render-block>`_, however, instead of an
-include and separate files, we can put the partials into a named blocks in their
-original location, and then just render that block if we have an HTMX request.
+include and separate files, we can put the partials into named blocks within the
+main template, and then just render that block if we have an HTMX request.
 
 In our example, as before, we have a paged list of objects (monsters, in this
 case), with a “load more” style paging control at the end. When the button is
