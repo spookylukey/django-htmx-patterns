@@ -5,6 +5,8 @@ This repo is a rough-and-ready compilation of the patterns I’m using and
 developing when writing `Django <https://www.djangoproject.com/>`_ projects that
 use `HTMX <https://htmx.org/>`_.
 
+The docs are intended to be viewed on GitHub: https://github.com/spookylukey/django-htmx-patterns/ and the code can be run locally or on repl.it (see below)
+
 My aims are to document and share:
 
 1. The basic patterns and control flow needed
