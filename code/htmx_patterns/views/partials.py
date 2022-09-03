@@ -65,7 +65,6 @@ def paging_with_inline_partials(request):
         rendered_block = render_block_to_string(
             template_name, "page-and-paging-controls", context=context, request=request
         )
-        # Create new simple HttpResponse as replacement
         return HttpResponse(content=rendered_block)
     return TemplateResponse(
         request,
