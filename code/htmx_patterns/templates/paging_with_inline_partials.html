@@ -14,7 +14,7 @@
 
       {% if page_obj.has_next %}
         <p id="paging-area">
-          <a href="?page={{ page_obj.next_page_number }}"
+          <a
             hx-get="?page={{ page_obj.next_page_number }}"
             hx-target="#paging-area"
             hx-swap="outerHTML"
@@ -27,7 +27,7 @@
 
   {% endif %}
 
-  
+
   <p>See also: <a href="{% url 'simple_post_form' %}">create monsters page page</a></p>
 
 {% endblock %}
