@@ -235,13 +235,16 @@ added to our ``for_htmx`` decorator, is reduced to:
 This is a pretty nice pattern — the complete “template routing” logic is visible
 within the template, and can be understood or changed without referring to the
 view code. The view code still has to explicitly opt-in to this behaviour, but
-is not concerned with the details.
+is not concerned with the details. The pattern shines even more for complex
+cases involving multiple targets and partials — it’s much easier to follow than
+using the ``if_hx_target`` routing mentioned above.
 
 Notice how in this case the target of the htmx swap is the ``#paging-area`` DOM
 element, while the template that gets rendered “into” it is a larger section of
 the template. Other patterns are possible — in some common cases the DOM element
 and the template block line up exactly, but they could be completely different.
-Be careful with `hx-swap <https://htmx.org/attributes/hx-swap/>`_ values.
+In all cases you need to pay attention to `hx-swap
+<https://htmx.org/attributes/hx-swap/>`_ values.
 
 
 Instead of ``hx-vals``, there are other options like `hx-headers
