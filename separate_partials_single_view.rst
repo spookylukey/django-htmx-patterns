@@ -41,7 +41,7 @@ Main template:
 
    {% if page_obj.has_next %}
      <p id="paging-area">
-       <a href="?page={{ page_obj.next_page_number }}"
+       <a href="#"
           hx-get="?page={{ page_obj.next_page_number }}"
           hx-target="#paging-area"
           hx-swap="outerHTML"
