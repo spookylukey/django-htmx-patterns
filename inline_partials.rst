@@ -87,7 +87,7 @@ Now our view code is now both more readable and much shorter, like this:
 
 .. code-block:: python
 
-   @for_htmx(block="page-and-paging-controls")
+   @for_htmx(use_block="page-and-paging-controls")
    def paging_with_inline_partials_improved(request):
        return TemplateResponse(
            request,
@@ -105,8 +105,8 @@ decorator takes an extra ``if_hx_target`` keyword arguments for that e.g.:
 
 .. code-block:: python
 
-   @for_htmx(if_hx_target="search-results", block="search-result-block")
-   @for_htmx(if_hx_target="paging-controls", block="page-and-paging-controls")
+   @for_htmx(if_hx_target="search-results", use_block="search-result-block")
+   @for_htmx(if_hx_target="paging-controls", use_block="page-and-paging-controls")
    def my_view(request):
        ...
 

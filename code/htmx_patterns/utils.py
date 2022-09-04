@@ -4,6 +4,11 @@ from render_block import render_block_to_string
 
 # This decorator combines a bunch of functionality, which you might not need all of!
 
+# The names of parameters are chosen to make usage sound close to natural language:
+
+# for htmx, if hx-target = "foo", then use block "bar"
+# @for_htmx(if_hx_target="foo", use_block="bar")
+
 # Future work for this decorator:
 
 # - typing. You could use type hints and static typing checks to ensure that is only used
@@ -12,7 +17,7 @@ from render_block import render_block_to_string
 # - different ways of matching htmx requests, if needed.
 
 
-def for_htmx(*, if_hx_target: str | None = None, template: str | None = None, block: str | None = None):
+def for_htmx(*, if_hx_target: str | None = None, use_template: str | None = None, use_block: str | None = None):
     """
     If the request is from htmx, then render a partial page, using either:
     - the supplied template name.
@@ -22,9 +27,9 @@ def for_htmx(*, if_hx_target: str | None = None, template: str | None = None, bl
     hx-target header must match the supplied value as well in order
     for this decorator to be applied.
     """
-    if block and template:
+    if use_block and use_template:
         raise ValueError("Pass only one of 'template' and 'block'")
-    if not (block or template):
+    if not (use_block or use_template):
         raise ValueError("You must pass one of 'template' and 'block'")
 
     def decorator(view):
@@ -38,11 +43,11 @@ def for_htmx(*, if_hx_target: str | None = None, template: str | None = None, bl
                     if resp.is_rendered:
                         raise ValueError("Cannot modify a response that has already been rendered")
 
-                    if template is not None:
-                        resp.template_name = template
-                    elif block is not None:
+                    if use_template is not None:
+                        resp.template_name = use_template
+                    elif use_block is not None:
                         rendered_block = render_block_to_string(
-                            resp.template_name, block, context=resp.context_data, request=request
+                            resp.template_name, use_block, context=resp.context_data, request=request
                         )
                         # Create new simple HttpResponse as replacement
                         resp = HttpResponse(content=rendered_block, status=resp.status_code, headers=resp.headers)

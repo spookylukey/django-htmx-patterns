@@ -26,7 +26,7 @@ def toggle_item(request, monster_id):
     return TemplateResponse(request, "_toggle_item_partial.html", {"monster": monster})
 
 
-def get_page_by_request(request, queryset, paginate_by=10):
+def get_page_by_request(request, queryset, paginate_by=6):
     return Paginator(queryset, per_page=paginate_by).get_page(request.GET.get("page"))
 
 
@@ -44,7 +44,7 @@ def paging_with_separate_partials(request):
     )
 
 
-@for_htmx(template="_page_and_paging_controls.html")
+@for_htmx(use_template="_page_and_paging_controls.html")
 def paging_with_separate_partials_improved(request):
     return TemplateResponse(
         request,
@@ -73,7 +73,7 @@ def paging_with_inline_partials(request):
     )
 
 
-@for_htmx(block="page-and-paging-controls")
+@for_htmx(use_block="page-and-paging-controls")
 def paging_with_inline_partials_improved(request):
     return TemplateResponse(
         request,
