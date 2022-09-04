@@ -82,3 +82,17 @@ def paging_with_inline_partials_improved(request):
             "page_obj": get_page_by_request(request, Monster.objects.all()),
         },
     )
+
+
+# Similar to above, but with better Locality Of Behaviour,
+# because the template specifies the "internal routing"
+# of which block to use.
+@for_htmx(use_block_from_params=True)
+def paging_with_inline_partials_improved_lob(request):
+    return TemplateResponse(
+        request,
+        "paging_with_inline_partials_improved_lob.html",
+        {
+            "page_obj": get_page_by_request(request, Monster.objects.all()),
+        },
+    )

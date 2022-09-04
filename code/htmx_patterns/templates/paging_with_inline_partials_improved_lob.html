@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h1>List of monsters</h1>
+
+  {% if page_obj.paginator.count == 0 %}
+    <p>We have no monsters!</p>
+  {% else %}
+
+    {% block page-and-paging-controls %}
+      {% for monster in page_obj %}
+        <p class="card">{{ monster.name }}</p>
+      {% endfor %}
+
+      {% if page_obj.has_next %}
+        <p id="paging-area">
+          <a
+            href="#"
+            hx-get="?page={{ page_obj.next_page_number }}"
+            hx-target="#paging-area"
+            hx-swap="outerHTML"
+            hx-vals='{"use_block": "page-and-paging-controls"}'
+          >Load more</a>
+        </p>
+      {% else %}
+        <p>That's all of them!</p>
+      {% endif %}
+    {% endblock %}
+
+  {% endif %}
+
+
+  <p>See also: <a href="{% url 'simple_post_form' %}">create monsters page page</a></p>
+
+{% endblock %}

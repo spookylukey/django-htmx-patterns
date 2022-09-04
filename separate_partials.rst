@@ -71,3 +71,10 @@ We also have two separate views, which look like this:
 
 (Instead of toggling, we could also have chosen to include a parameter in the
 POST data to indicate which state to change to).
+
+
+Security issues
+---------------
+
+The same potential security issues apply here as described for `inline partials
+<./inline_partials.rst#security-issues>`_.

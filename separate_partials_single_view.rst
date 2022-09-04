@@ -97,3 +97,10 @@ wraps up the logic for us - see `implementation
 This decorator has some other tricks — it can match on specific ``Hx-Target``
 headers to choose different templates, which can useful if you are doing more
 advanced things, like both htmx search and paging in the same view.
+
+
+Security issues
+---------------
+
+The same potential security issues apply here as described for `inline partials
+<./inline_partials.rst#security-issues>`_.

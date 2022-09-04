@@ -17,20 +17,25 @@ from render_block import render_block_to_string
 # - different ways of matching htmx requests, if needed.
 
 
-def for_htmx(*, if_hx_target: str | None = None, use_template: str | None = None, use_block: str | None = None):
+def for_htmx(
+    *,
+    if_hx_target: str | None = None,
+    use_template: str | None = None,
+    use_block: str | None = None,
+    use_block_from_params: bool = False,
+):
     """
     If the request is from htmx, then render a partial page, using either:
-    - the supplied template name.
-    - the specified block name
+    - the template specified in `use_template` param
+    - the block specified in `use_block` param
+    - the block specified in GET/POST parameter "use_block", if `use_block_from_params=True` is passed
 
     If the optional `if_hx_target` parameter is supplied, the
     hx-target header must match the supplied value as well in order
     for this decorator to be applied.
     """
-    if use_block and use_template:
-        raise ValueError("Pass only one of 'template' and 'block'")
-    if not (use_block or use_template):
-        raise ValueError("You must pass one of 'template' and 'block'")
+    if len([p for p in [use_block, use_template, use_block_from_params] if p]) != 1:
+        raise ValueError("You must pass exactly one of 'use_template', 'use_block' or 'use_block_from_params=True'")
 
     def decorator(view):
         @wraps(view)
@@ -42,6 +47,13 @@ def for_htmx(*, if_hx_target: str | None = None, use_template: str | None = None
                         raise ValueError("Cannot modify a response that isn't a TemplateResponse")
                     if resp.is_rendered:
                         raise ValueError("Cannot modify a response that has already been rendered")
+
+                    if use_block_from_params:
+                        use_block_from_params_val = _get_param_from_request(request, "use_block")
+                        if use_block_from_params_val is None:
+                            return HttpResponse("No `use_block` in request params", status="400")
+
+                        use_block = use_block_from_params_val
 
                     if use_template is not None:
                         resp.template_name = use_template
@@ -57,3 +69,14 @@ def for_htmx(*, if_hx_target: str | None = None, use_template: str | None = None
         return _view
 
     return decorator
+
+
+def _get_param_from_request(request, param):
+    """
+    Checks GET then POST params for specified param
+    """
+    if param in request.GET:
+        return request.GET[param]
+    elif request.method == "POST" and param in request.POST:
+        return request.POST[param]
+    return None

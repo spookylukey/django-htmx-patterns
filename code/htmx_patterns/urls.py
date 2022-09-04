@@ -32,5 +32,10 @@ urlpatterns = [
         partials.paging_with_inline_partials_improved,
         name="paging_with_inline_partials_improved",
     ),
+    path(
+        "paging-with-inline-partials-improved-lob/",
+        partials.paging_with_inline_partials_improved_lob,
+        name="paging_with_inline_partials_improved_lob",
+    ),
     path("admin/", admin.site.urls),
 ]
