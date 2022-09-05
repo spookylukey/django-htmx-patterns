@@ -154,13 +154,16 @@ they can bypass the ``user.can_view_sensitive_info`` check.
 
 Mitigation techniques for this problem include:
 
-- Move the permission check conditional into the partial block or template, so
-  that it cannot be bypassed.
-
 - Move the permission check from the template into the view code where it cannot
   be bypassed, such that the data is never passed to the template if the user
   doesn’t have permission to see it. The template then just checks “is the data
-  present”, rather than “does the user have permission to see it”.
+  present”, rather than “does the user have permission to see it”. This is best
+  practice anyway — if the template shouldn’t be displaying data, it shouldn’t
+  be given the data.
+
+- Move the permission check conditional into the partial block or template, so
+  that it cannot be bypassed.
+
 
 
 
