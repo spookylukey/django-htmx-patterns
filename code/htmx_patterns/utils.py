@@ -43,6 +43,7 @@ def for_htmx(
             resp = view(request, *args, **kwargs)
             if request.headers.get("Hx-Request", False):
                 if if_hx_target is None or request.headers.get("Hx-Target", None) == if_hx_target:
+                    block_to_use = use_block
                     if not hasattr(resp, "render"):
                         raise ValueError("Cannot modify a response that isn't a TemplateResponse")
                     if resp.is_rendered:
@@ -53,13 +54,13 @@ def for_htmx(
                         if use_block_from_params_val is None:
                             return HttpResponse("No `use_block` in request params", status="400")
 
-                        use_block = use_block_from_params_val
+                        block_to_use = use_block_from_params_val
 
                     if use_template is not None:
                         resp.template_name = use_template
-                    elif use_block is not None:
+                    elif block_to_use is not None:
                         rendered_block = render_block_to_string(
-                            resp.template_name, use_block, context=resp.context_data, request=request
+                            resp.template_name, block_to_use, context=resp.context_data, request=request
                         )
                         # Create new simple HttpResponse as replacement
                         resp = HttpResponse(content=rendered_block, status=resp.status_code, headers=resp.headers)
