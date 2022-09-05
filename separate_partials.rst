@@ -74,6 +74,11 @@ POST data to indicate which state to change to).
 
 Example `view code <./code/htmx_patterns/views/partials.py>`_, `main template <./code/htmx_patterns/templates/toggle_with_separate_partials.html>`_, `partial template <./code/htmx_patterns/templates/_toggle_item_partial.html>`_, `live demo <https://django-htmx-patterns.spookylukey1.repl.co/toggle-with-separate-partials/>`__
 
+Possible improvements to this pattern include:
+
+- `inline partials <./inline_partials.rst>`_.
+- Combining the two views ``TODO``.
+
 
 Security issues
 ---------------
