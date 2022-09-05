@@ -56,6 +56,13 @@ code.
 To install locally, use a virtualenv, and then either use poetry or see the
 code/requirements.txt file for pip.
 
+Feedback
+--------
+
+Your feedback is very welcome! Star this repo if you like it, and please share
+ideas on `discussions
+<https://github.com/spookylukey/django-htmx-patterns/discussions>`_.
+
 Links
 -----
 

@@ -30,7 +30,10 @@ this repo, you should:
 
 * copy-paste it freely into your project (the code is in public domain)
 * improve on it (and discard it if it gets in your way)
-* if you want, share your improvements or alternatives back here.
+* if you want, share your improvements or alternatives back here, in
+  `discussions
+  <https://github.com/spookylukey/django-htmx-patterns/discussions>`_ or as a
+  `pull request <https://github.com/spookylukey/django-htmx-patterns/pulls>`_.
 
 But don’t ask me to release this code as a library, and I suggest you shouldn’t
 either (at least not yet).
