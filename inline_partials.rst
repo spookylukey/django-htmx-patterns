@@ -128,7 +128,8 @@ This approach can be extended with other functionality, depending on your use ca
 
 Full code: `view <./code/htmx_patterns/views/partials.py>`_, `template
 <./code/htmx_patterns/templates/paging_with_inline_partials.html>`__, `decorator
-<./code/htmx_patterns/utils.py>`_.
+<./code/htmx_patterns/utils.py>`_, `live demo
+<https://django-htmx-patterns.spookylukey1.repl.co/paging-with-inline-partials-improved/>`__
 
 Security issues
 ---------------
@@ -253,7 +254,9 @@ the block to use.
 
 Full code: `view <./code/htmx_patterns/views/partials.py>`_, `template
 <./code/htmx_patterns/templates/paging_with_inline_partials_improved_lob.html>`__, `decorator
-<./code/htmx_patterns/utils.py>`_.
+<./code/htmx_patterns/utils.py>`_, `live demo
+<https://django-htmx-patterns.spookylukey1.repl.co/paging-with-inline-partials-improved-lob/>`__
+
 
 
 Downsides

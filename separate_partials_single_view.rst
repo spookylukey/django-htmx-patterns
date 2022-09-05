@@ -98,6 +98,8 @@ This decorator has some other tricks — it can match on specific ``Hx-Target``
 headers to choose different templates, which can useful if you are doing more
 advanced things, like both htmx search and paging in the same view.
 
+Example `view code <./code/htmx_patterns/views/partials.py>`_, `main template <./code/htmx_patterns/templates/paging_with_separate_partials.html>`_, `partial template <./code/htmx_patterns/templates/_page_and_paging_controls.html>`_, `live demo <https://django-htmx-patterns.spookylukey1.repl.co/paging-with-separate-partials-improved/>`__
+
 
 Security issues
 ---------------
