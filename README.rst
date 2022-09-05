@@ -5,7 +5,9 @@ This repo is a rough-and-ready compilation of the patterns I’m using and
 developing when writing `Django <https://www.djangoproject.com/>`_ projects that
 use `htmx <https://htmx.org/>`_.
 
-The docs are intended to be viewed on GitHub: https://github.com/spookylukey/django-htmx-patterns/ and the code can be run locally or on repl.it (see below)
+The docs are intended to be viewed on GitHub:
+https://github.com/spookylukey/django-htmx-patterns/ and the code can be run
+locally or on repl.it (see below)
 
 My aims are to document and share:
 
@@ -32,7 +34,6 @@ for the sake of clarity.
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 
-Full Django project demoing code examples is in the `code folder <./code/>`_.
 
 
 TODO
@@ -46,9 +47,14 @@ TODO
 Code folder
 -----------
 
-In the code folder is a demo app which has full working examples of everything in the docs. You can see it live on `repl.it <https://replit.com/>`_ at https://django-htmx-patterns.spookylukey1.repl.co and you can fork it from https://replit.com/@spookylukey1/django-htmx-patterns to play around with the code.
+In the `code folder <./code/>`_ is a demo app which has full working examples of
+everything in the docs. You can see it live on `repl.it <https://replit.com/>`_
+at https://django-htmx-patterns.spookylukey1.repl.co and you can fork it from
+https://replit.com/@spookylukey1/django-htmx-patterns to play around with the
+code.
 
-To install locally, use a virtualenv, and then either use poetry or see the code/requirements.txt file for pip.
+To install locally, use a virtualenv, and then either use poetry or see the
+code/requirements.txt file for pip.
 
 Links
 -----
