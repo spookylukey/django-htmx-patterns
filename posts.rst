@@ -48,3 +48,9 @@ into the ``<body>`` element, usually in a ``base.html`` template:
 Example `view code <./code/htmx_patterns/views/posts.py>`_, `template
 <./code/htmx_patterns/templates/post_without_form.html>`__, `base template
 <./code/htmx_patterns/templates/base.html>`_, `live demo <https://django-htmx-patterns.spookylukey1.repl.co/post-without-form/>`__.
+
+
+There are other options, like hooking into `htmx:beforeRequest
+<https://htmx.org/events/#htmx:beforeRequest>`_ and adding Javascript code
+described in the `Django CSRF docs
+<https://docs.djangoproject.com/en/4.1/howto/csrf/>`_
