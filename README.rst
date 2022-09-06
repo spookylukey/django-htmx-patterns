@@ -66,8 +66,14 @@ ideas on `discussions
 Links
 -----
 
-Some other good resources:
+Some other good htmx resources:
 
 * `How to use htmx in Django <https://www.mattlayman.com/blog/2021/how-to-htmx-django/>`_ - tutorial blog post
 * `django-htmx <https://github.com/adamchainz/django-htmx>`_ - utility library with helpful docs
 * `django-htmx-fun <https://github.com/guettli/django-htmx-fun>`_ - example application with Django/htmx
+
+If you liked this repo, you might also be helped by some of my other resources:
+
+* `django-functest <https://github.com/django-functest/django-functest>`_
+* `Django Views — The Right Way
+  <https://spookylukey.github.io/django-views-the-right-way/>`_
