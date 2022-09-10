@@ -1,6 +1,9 @@
 Inline partials
 ===============
 
+Also known as `“template fragments”
+<https://htmx.org/essays/template-fragments/>`_.
+
 This improves on the patterns used for `a single view with
 separate partial files <./separate_partials_single_view.st>`_.
 
