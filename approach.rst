@@ -15,10 +15,10 @@ I also strongly recommend starting from **function based views**, and not class
 based views. There are `many excellent reasons to always use function based
 views <https://spookylukey.github.io/django-views-the-right-way/>`_, especially
 when we are talking about views that are generating HTML, but if you are doing htmx
-there are even more. To see and extract good htmx patterns, you need:
+there are even more. To see and extract good htmx patterns, you need to:
 
-1. To be able see the complete control flow
-2. To be able to re-arrange the control flow
+1. see the complete control flow
+2. be able to re-arrange the control flow
 
 Using CBVs will seriously hinder you in both these.
 
