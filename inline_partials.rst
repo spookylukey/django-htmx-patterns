@@ -208,9 +208,9 @@ Our template now looks like this - the only change is the ``hx-vals`` line:
              <a
                href="#"
                hx-get="?page={{ page_obj.next_page_number }}"
+               hx-vals='{"use_block": "page-and-paging-controls"}'
                hx-target="#paging-area"
                hx-swap="outerHTML"
-               hx-vals='{"use_block": "page-and-paging-controls"}'
              >Load more</a>
            </p>
          {% else %}
