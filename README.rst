@@ -71,7 +71,7 @@ Some other good htmx resources:
 * `How to use htmx in Django <https://www.mattlayman.com/blog/2021/how-to-htmx-django/>`_ - tutorial blog post
 * `django-htmx <https://github.com/adamchainz/django-htmx>`_ - utility library with helpful docs
 * `django-htmx-fun <https://github.com/guettli/django-htmx-fun>`_ - example application with Django/htmx
-* `django-siteajax <https://github.com/idlesign/django-siteajax>` - has some similar ideas to this repo
+* `django-siteajax <https://github.com/idlesign/django-siteajax>`_ - has some similar ideas to this repo
 
 If you liked this repo, you might also be helped by some of my other resources:
 
