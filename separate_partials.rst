@@ -19,7 +19,7 @@ In our example, we are making monsters either happy or sad!
 
 The templates look like this:
 
-Main template:
+Main template: toggle_with_separate_partials.html
 
 .. code-block:: html+django
 
