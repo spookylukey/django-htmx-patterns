@@ -13,7 +13,7 @@ Both of them do not work well with the way jinja2 is integrated into Django. The
 - You are giving up on the Jinja2 environment that Django configures for you.
 - You need to make sure that all the paths are set in the right way so that Jinja2 finds your templates.
 - You cannot use `TemplateResponse()` any longer.
-- You need to adjust all your routes quite heavily to make use of the new render logic.
+- You need to adjust some of your views quite heavily to make use of the new render logic.
 
 We propose another solution: write your own Jinja2 template backend. It is not a lot of code, can be copied in large parts from the existing Jinja2 backend that Django includes, and provides a lot of flexibility while staying in the common workflows that Django offers.
 
