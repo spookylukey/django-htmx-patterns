@@ -26,14 +26,14 @@ def for_htmx(
     *,
     if_hx_target: str | None = None,
     use_template: str | None = None,
-    use_block: str | None = None,
+    use_block: str | list[str] | None = None,
     use_block_from_params: bool = False,
 ):
     """
     If the request is from htmx, then render a partial page, using either:
     - the template specified in `use_template` param
-    - the block specified in `use_block` param
-    - the block specified in GET/POST parameter "use_block", if `use_block_from_params=True` is passed
+    - the block/blocks specified in `use_block` param
+    - the block/blocks specified in GET/POST parameter "use_block", if `use_block_from_params=True` is passed
 
     If the optional `if_hx_target` parameter is supplied, the
     hx-target header must match the supplied value as well in order
@@ -48,7 +48,7 @@ def for_htmx(
             resp = view(request, *args, **kwargs)
             if is_htmx(request):
                 if if_hx_target is None or request.headers.get("Hx-Target", None) == if_hx_target:
-                    block_to_use = use_block
+                    blocks_to_use = use_block
                     if not hasattr(resp, "render"):
                         raise ValueError("Cannot modify a response that isn't a TemplateResponse")
                     if resp.is_rendered:
@@ -59,16 +59,24 @@ def for_htmx(
                         if use_block_from_params_val is None:
                             return HttpResponse("No `use_block` in request params", status="400")
 
-                        block_to_use = use_block_from_params_val
+                        blocks_to_use = use_block_from_params_val
 
                     if use_template is not None:
                         resp.template_name = use_template
-                    elif block_to_use is not None:
-                        rendered_block = render_block_to_string(
-                            resp.template_name, block_to_use, context=resp.context_data, request=request
-                        )
+                    elif blocks_to_use is not None:
+                        if not isinstance(blocks_to_use, list):
+                            blocks_to_use = [blocks_to_use]
+
+                        rendered_blocks = [
+                            render_block_to_string(resp.template_name, b, context=resp.context_data, request=request)
+                            for b in blocks_to_use
+                        ]
                         # Create new simple HttpResponse as replacement
-                        resp = HttpResponse(content=rendered_block, status=resp.status_code, headers=resp.headers)
+                        resp = HttpResponse(
+                            content="".join(rendered_blocks),
+                            status=resp.status_code,
+                            headers=resp.headers,
+                        )
 
             return resp
 

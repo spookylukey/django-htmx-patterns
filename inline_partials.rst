@@ -253,6 +253,8 @@ and the template block line up exactly, but they could be completely different.
 In all cases you need to pay attention to `hx-swap
 <https://htmx.org/attributes/hx-swap/>`_ values.
 
+To better support cases like Out Of Band swaps, we can also allow multiple
+blocks to be rendered.
 
 Instead of ``hx-vals``, there are other options like `hx-headers
 <https://htmx.org/attributes/hx-headers/>`_ which could be used for indicating
