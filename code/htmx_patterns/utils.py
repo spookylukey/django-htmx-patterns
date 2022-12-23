@@ -1,3 +1,4 @@
+from django.http.request import HttpRequest
 from django.http.response import HttpResponse
 from django.utils.functional import wraps
 from render_block import render_block_to_string
@@ -15,6 +16,10 @@ from render_block import render_block_to_string
 #   on view functions that return TemplateResponse
 
 # - different ways of matching htmx requests, if needed.
+
+
+def is_htmx(request: HttpRequest):
+    return request.headers.get("Hx-Request", False)
 
 
 def for_htmx(
@@ -41,7 +46,7 @@ def for_htmx(
         @wraps(view)
         def _view(request, *args, **kwargs):
             resp = view(request, *args, **kwargs)
-            if request.headers.get("Hx-Request", False):
+            if is_htmx(request):
                 if if_hx_target is None or request.headers.get("Hx-Target", None) == if_hx_target:
                     block_to_use = use_block
                     if not hasattr(resp, "render"):

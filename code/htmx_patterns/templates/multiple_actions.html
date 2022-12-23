@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h1>{{ monster }}</h1>
+
+  {% block monster-form %}
+    <form
+      method="POST"
+      action=""
+      id="monster-form"
+      hx-post=""
+      hx-target="#monster-form"
+      hx-swap="outerHTML"
+      hx-vals='{"use_block": "monster-form"}'
+    >
+      {% csrf_token %}
+      {% if monster.is_happy %}
+        <p>{{ monster.name }} is happy.</p>
+        <button name="kick" type="submit">Kick it!</button>
+      {% else %}
+        <p>{{ monster.name }} is sad.</p>
+        <button name="hug" type="submit">Hug it!</button>
+
+      {% endif %}
+
+    </form>
+  {% endblock %}
+{% endblock %}

@@ -1,0 +1,141 @@
+Single view with actions combined
+=================================
+
+Sometimes with htmx you may have one view to render the whole page, and separate
+views to manage any POST actions. Sometimes, however, it is more convenient to
+define those actions with a single view.
+
+The pattern I use here is almost identical to the code I would write if I wasn’t
+using htmx at all. Consider a page that shows an item, and has a couple of
+buttons to control it - first without htmx:
+
+View code:
+
+.. code-block:: python
+
+   def monster_detail(request: HttpRequest, monster_id: int):
+       monster: Monster = get_object_or_404(Monster.objects.all(), id=monster_id)
+
+       if request.method == "POST":
+           if "kick" in request.POST:
+               monster.kick()
+           elif "hug" in request.POST:
+               monster.hug()
+           return HttpResponseRedirect("")
+
+       return TemplateResponse(
+           request,
+           "monster_detail.html",
+           {
+               "monster": monster,
+           },
+       )
+
+
+The HTML to make this work simply needs a POST form with two ``<button type=submit>`` elements with
+different ``name`` attributes:
+
+.. code-block:: html
+
+    <form
+      method="POST"
+      action=""
+      >
+      {% csrf_token %}
+      {% if monster.is_happy %}
+        <p>{{ monster.name }} is happy.</p>
+        <button name="kick" type="submit">Kick it!</button>
+      {% else %}
+        <p>{{ monster.name }} is sad.</p>
+        <button name="hug" type="submit">Hug it!</button>
+
+      {% endif %}
+
+    </form>
+
+
+(Here, the available button actions depend on the current ``is_happy`` state,
+and are mutually exclusive, but that isn’t always the case).
+
+Nice things about this include:
+
+- less “wiring” between different views. You can just do ``action=""``,
+  ``hx-post=""``, and ``HttpResponseRedirect("")`` and everything gets
+  posted/redirected to the same URL.
+
+  Often you will see ``"."`` instead of the empty URL "". The only difference is
+  that the relative URL ``.`` represents the current path **without query
+  parameters**, so it will cause the query string to be stripped, which you may
+  or may not want, while the empty URL (sometimes spelled as a single space in
+  ``action=" "``) includes the whole of the current location.
+
+- Less boilerplate and repetition of the initial parts of the view function.
+
+- The single “page” is represented by a single view function.
+
+To htmx-ify this, we have a few very small tweaks to make:
+
+* In the template, add some blocks (or partials) for the
+* In the template, add some ``hx-`` attributes
+* Don’t do a redirect for htmx requests
+* For the htmx POST request, render a part of the template
+
+
+Here I will do this using our previous `for_htmx decorator with inline partials <./inline_partials.rst>`_ pattern.
+
+New view code:
+
+.. code-block:: python
+
+   @for_htmx(use_block_from_params=True)
+   def monster_detail(request: HttpRequest, monster_id: int):
+       monster: Monster = get_object_or_404(Monster.objects.all(), id=monster_id)
+
+       if request.method == "POST":
+           if "kick" in request.POST:
+               monster.kick()
+           elif "hug" in request.POST:
+               monster.hug()
+           if not is_htmx(request):
+               return HttpResponseRedirect("")
+
+       return TemplateResponse(
+           request,
+           "monster_detail.html",
+           {
+               "monster": monster,
+           },
+       )
+
+
+New HTML:
+
+.. code-block:: html
+
+  {% block monster-form %}
+    <form
+      method="POST"
+      action=""
+      id="monster-form"
+      hx-post=""
+      hx-target="#monster-form"
+      hx-swap="outerHTML"
+      hx-vals='{"use_block": "monster-form"}'
+      >
+      {% csrf_token %}
+      {% if monster.is_happy %}
+        <p>{{ monster.name }} is happy.</p>
+        <button name="kick" type="submit">Kick it!</button>
+      {% else %}
+        <p>{{ monster.name }} is sad.</p>
+        <button name="hug" type="submit">Hug it!</button>
+
+      {% endif %}
+
+    </form>
+  {% endblock %}
+
+
+Here, I’ve also ensured that the page continues to work even if the htmx library doesn’t load client side.
+
+Full code: `view <./code/htmx_patterns/views/actions.py>`_, `template <./code/htmx_patterns/templates/multiple_actions.html>`__

@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from . import views
-from .views import headers, partials, posts
+from .views import actions, headers, partials, posts
 
 urlpatterns = [
     path("", views.home),
@@ -36,6 +36,11 @@ urlpatterns = [
         "paging-with-inline-partials-improved-lob/",
         partials.paging_with_inline_partials_improved_lob,
         name="paging_with_inline_partials_improved_lob",
+    ),
+    path(
+        "multiple-actions/<int:monster_id>/",
+        actions.multiple_actions,
+        name="multiple_actions",
     ),
     path("admin/", admin.site.urls),
 ]

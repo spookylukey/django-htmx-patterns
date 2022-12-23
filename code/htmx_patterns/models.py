@@ -8,6 +8,18 @@ class Monster(models.Model):
     name = models.CharField(max_length=100)
     is_happy = models.BooleanField(default=True)
 
+    def toggle_happiness(self):
+        self.is_happy = not self.is_happy
+        self.save()
+
+    def kick(self):
+        self.is_happy = False
+        self.save()
+
+    def hug(self):
+        self.is_happy = True
+        self.save()
+
     def __str__(self):
         return self.name
 

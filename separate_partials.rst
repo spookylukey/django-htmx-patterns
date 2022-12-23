@@ -44,7 +44,7 @@ Partial template ``_toggle_item_partial.html``:
      <button hx-post="{% url 'toggle_item' monster_id=monster.id %}"
              hx-target="#monster-{{ monster.id }}"
              hx-swap="outerHTML"
-             >{% if monster.is_happy %}Kick it!{% else %}Stroke it!{% endif %}
+             >{% if monster.is_happy %}Kick it!{% else %}Hug it!{% endif %}
      </button>
    </div>
 
@@ -65,8 +65,7 @@ We also have two separate views, which look like this:
    @require_POST
    def toggle_item(request, monster_id):
        monster = Monster.objects.get(id=monster_id)
-       monster.is_happy = not monster.is_happy
-       monster.save()
+       monster.toggle_happiness()
        return TemplateResponse(request, "_toggle_item_partial.html", {"monster": monster})
 
 (Instead of toggling, we could also have chosen to include a parameter in the

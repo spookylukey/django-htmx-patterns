@@ -4,6 +4,6 @@
   <button hx-post="{% url 'toggle_item' monster_id=monster.id %}"
     hx-target="#monster-{{ monster.id }}"
     hx-swap="outerHTML"
-  >{% if monster.is_happy %}Kick it!{% else %}Stroke it!{% endif %}
+  >{% if monster.is_happy %}Kick it!{% else %}Hug it!{% endif %}
   </button>
 </div>

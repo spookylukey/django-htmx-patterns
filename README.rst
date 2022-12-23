@@ -31,6 +31,7 @@ for the sake of clarity.
 * `Partials using separate templates <./separate_partials.rst>`_
 * `Separate partials with a single view <./separate_partials_single_view.rst>`_
 * `Inline partials <./inline_partials.rst>`_
+* `Single view with actions combined <./actions.rst>`_
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 

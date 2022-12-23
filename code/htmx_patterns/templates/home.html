@@ -15,5 +15,8 @@
     <li><a href="{% url 'paging_with_inline_partials' %}">paging using inline partials</a></li>
     <li><a href="{% url 'paging_with_inline_partials_improved' %}">paging using inline partials, decorator</a></li>
     <li><a href="{% url 'paging_with_inline_partials_improved_lob' %}">paging using inline partials, decorator with better LOB</a></li>
+    {% if monster %}
+      <li><a href="{% url 'multiple_actions' monster.id %}">multiple actions on a page</a></li>
+    {% endif %}
   </ul>
 {% endblock %}
