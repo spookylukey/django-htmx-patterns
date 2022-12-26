@@ -90,7 +90,7 @@ def _get_param_from_request(request, param):
     Checks GET then POST params for specified param
     """
     if param in request.GET:
-        return request.GET[param]
+        return request.GET.getlist(param)
     elif request.method == "POST" and param in request.POST:
-        return request.POST[param]
+        return request.POST.getlist(param)
     return None
