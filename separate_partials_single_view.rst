@@ -104,6 +104,11 @@ Improvements to this pattern include:
 
 - `inline partials <./inline_partials.rst>`_.
 
+Variants on this pattern include:
+
+- `Single view with actions combined <./actions.rst>`_ (where we also include
+  processing of POST in the single view, as well as multiple templates).
+
 
 Security issues
 ---------------

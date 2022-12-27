@@ -2,7 +2,9 @@ Single view with actions combined
 =================================
 
 Sometimes with htmx you may have one view to render the whole page, and separate
-views to manage any POST actions. Sometimes, however, it is more convenient to
+views to manage any POST actions (see the `toggle_with_separate_partials and
+toggle_item view functions <./code/htmx_patterns/views/partials.py>`_ for an
+example of this). Sometimes, however, it is more convenient and logical to
 define those actions with a single view.
 
 The pattern I use here is almost identical to the code I would write if I wasn’t
@@ -32,8 +34,11 @@ View code:
        )
 
 
-The HTML to make this work simply needs a POST form with two ``<button type=submit>`` elements with
-different ``name`` attributes:
+Notice how we can have multiple actions, as above, by detecting different
+parameters present in the POST request. The HTML to make this work simply needs
+a POST form with two ``<button type=submit>`` or ``<input type="submit">``
+elements with different ``name`` attributes (because the clicked button’s
+``name`` attribute will be included in the POST data):
 
 .. code-block:: html
 
@@ -48,14 +53,13 @@ different ``name`` attributes:
       {% else %}
         <p>{{ monster.name }} is sad.</p>
         <button name="hug" type="submit">Hug it!</button>
-
       {% endif %}
 
     </form>
 
 
-(Here, the available button actions depend on the current ``is_happy`` state,
-and are mutually exclusive, but that isn’t always the case).
+Here, the available button actions depend on the current ``is_happy`` state, and
+are mutually exclusive, but that doesn’t have to be the case.
 
 Nice things about this include:
 
@@ -75,11 +79,10 @@ Nice things about this include:
 
 To htmx-ify this, we have a few very small tweaks to make:
 
-* In the template, add some blocks (or partials) for the
+* In the template, add some blocks (or partials) for the parts we need to render separately.
 * In the template, add some ``hx-`` attributes
 * Don’t do a redirect for htmx requests
-* For the htmx POST request, render a part of the template
-
+* For the htmx POST request, render a part of the template.
 
 Here I will do this using our previous `for_htmx decorator with inline partials <./inline_partials.rst>`_ pattern.
 
@@ -139,3 +142,7 @@ New HTML:
 Here, I’ve also ensured that the page continues to work even if the htmx library doesn’t load client side.
 
 Full code: `view <./code/htmx_patterns/views/actions.py>`_, `template <./code/htmx_patterns/templates/multiple_actions.html>`__
+
+For improvements to this pattern, see:
+
+* `Redirect-after-post patterns <./redirect_after_post.rst>`_

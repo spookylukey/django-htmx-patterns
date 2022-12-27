@@ -1,4 +1,6 @@
-from django.http.request import HttpRequest
+import copy
+
+from django.http.request import HttpRequest, QueryDict
 from django.http.response import HttpResponse
 from django.utils.functional import wraps
 from render_block import render_block_to_string
@@ -94,3 +96,13 @@ def _get_param_from_request(request, param):
     elif request.method == "POST" and param in request.POST:
         return request.POST.getlist(param)
     return None
+
+
+def make_get_request(request: HttpRequest) -> HttpRequest:
+    """
+    Returns a new GET request based on passed in request.
+    """
+    new_request = copy.copy(request)
+    new_request.POST = QueryDict()
+    new_request.method = "GET"
+    return new_request

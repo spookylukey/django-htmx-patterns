@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from . import views
-from .views import actions, headers, partials, posts
+from .views import actions, headers, partials, posts, redirects
 
 urlpatterns = [
     path("", views.home),
@@ -41,6 +41,11 @@ urlpatterns = [
         "multiple-actions/<int:monster_id>/",
         actions.multiple_actions,
         name="multiple_actions",
+    ),
+    path(
+        "redirect-after-post/",
+        redirects.redirect_after_post,
+        name="redirect_after_post",
     ),
     path("admin/", admin.site.urls),
 ]

@@ -24,6 +24,10 @@ mentioned here, such as `django-htmx
 <https://github.com/adamchainz/django-htmx>`_, but I won’t be using any of them
 for the sake of clarity.
 
+
+Contents
+--------
+
 * `Approach <./approach.rst>`_
 * `Base template <./base_template.rst>`_
 * `Headers <./headers.rst>`_
@@ -32,15 +36,14 @@ for the sake of clarity.
 * `Separate partials with a single view <./separate_partials_single_view.rst>`_
 * `Inline partials <./inline_partials.rst>`_
 * `Single view with actions combined <./actions.rst>`_
+* `Internal redirect-after-post <./redirect_after_post.rst>`_
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
-
 
 
 TODO
 ----
 
-* Combined vs separate view functions
 * Patterns for use with `django-functest
   <https://django-functest.readthedocs.io/en/latest/>`_
 

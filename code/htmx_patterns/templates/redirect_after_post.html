@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block body %}
+  <h1>Monsters</h1>
+
+  <form
+    method="POST"
+    action=""
+    hx-post=""
+    hx-vals='{"use_block": ["happy-monsters", "sad-monsters"]}'
+    hx-swap="none"
+  >{% csrf_token %}
+    <table>
+      <thead>
+        <tr>
+          <th>Happy monsters</th>
+          <th>Sad monsters</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td style="max-height: 10em; overflow: scroll;">
+            {% block happy-monsters %}
+              <div id="happy-monsters"
+                hx-swap-oob="true"
+              >
+                {% for monster in happy_monsters %}
+                  <label>
+                    <input name="happy_monster_{{ monster.id }}" type="checkbox"
+                      {% if monster in selected_happy_monsters %}checked{% endif %}
+                    >
+                    {{ monster.name }}
+                  </label><br>
+                {% endfor %}
+              </div>
+            {% endblock %}
+          </td>
+          <td style="max-height: 10em; overflow: scroll;">
+            {% block sad-monsters %}
+              <div id="sad-monsters"
+                hx-swap-oob="true"
+              >
+                {% for monster in sad_monsters %}
+                  <label>
+                    <input name="sad_monster_{{ monster.id }}" type="checkbox"
+                      {% if monster in selected_sad_monsters %}checked{% endif %}
+                    >
+                    {{ monster.name }}
+                  </label><br>
+                {% endfor %}
+              </div>
+            {% endblock %}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <button name="kick" type="submit">Kick them!</button>
+          </td>
+          <td>
+            <button name="hug" type="submit">Hug them!</button>
+          </td>
+        </tr>
+
+      </tbody>
+    </table>
+  </form>
+
+
+  <p>See also: <a href="{% url 'simple_post_form' %}">create monsters page</a></p>
+
+{% endblock %}

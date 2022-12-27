@@ -18,5 +18,6 @@
     {% if monster %}
       <li><a href="{% url 'multiple_actions' monster.id %}">multiple actions on a page</a></li>
     {% endif %}
+    <li><a href="{% url 'redirect_after_post' %}">redirect after post</a></li>
   </ul>
 {% endblock %}
