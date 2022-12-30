@@ -1,5 +1,5 @@
-Redirect-after-post
-===================
+Internal redirect after post
+============================
 
 This builds on the `Single view with actions combined <./actions.rst>`_ pattern.
 

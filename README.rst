@@ -36,7 +36,7 @@ Contents
 * `Separate partials with a single view <./separate_partials_single_view.rst>`_
 * `Inline partials <./inline_partials.rst>`_
 * `Single view with actions combined <./actions.rst>`_
-* `Internal redirect-after-post <./redirect_after_post.rst>`_
+* `Internal redirect after post <./redirect_after_post.rst>`_
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 
