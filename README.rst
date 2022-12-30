@@ -40,6 +40,14 @@ Contents
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 
+Monsters
+--------
+
+My example code includes sad and happy monsters that can be hugged or kicked to
+change their state. Please note that I do not endorse the kicking of monsters,
+nor advise hugging them. No real monsters were harmed during the making of this
+repo.
+
 
 TODO
 ----
