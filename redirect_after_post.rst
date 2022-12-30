@@ -79,7 +79,7 @@ This relies on some HTML that looks like this:
 
 When we come to htmx-ify this, we want the elements containing lists to get
 refreshed, but everything else to stay the same. We can achieve this most easily
-by adding blocks and IDs (using the `inline partial <./partials.rst>`_ approach)
+by adding blocks and IDs (using the `inline partials <./inline_partials.rst>`_ approach)
 and using two `Out Of Band <https://htmx.org/docs/#oob_swaps>`_ swaps. Our
 previous ``for_htmx`` decorator will work well for this.
 
@@ -88,7 +88,7 @@ However, what should we do instead of the redirect?
 - If we leave the redirect as it is, we’ll get a GET request that loses the
   important htmx parameters in the POST data. Also, the latency of an extra
   browser round-trip for the extra HTTP request is completely unnecessary, and we
-  want to avoid that.
+  want to avoid that to keep our page snappy.
 
 - But, if we just allow flow control to continue through the view function, the
   ``sad_monsters`` and ``happy_monsters`` lists will be wrong — they reflect the
@@ -180,8 +180,10 @@ state, it just starts over from the top.
 An extension to this pattern is sometimes needed if there is extra information
 needed from the POST data that needs to be propagated. In the above example, we
 have a buglet if the user selects items from both lists, and then presses one
-button — the checked items in the other list become unchecked. If we want to fix
-that, we can propagate forward the selected items as additional data passed into
-our “internal” view function. See the full code for an example.
+button — the checked items in the other list become unchecked, as their state is
+reset to unchecked every time the templates are rendered. If we want to fix
+that, we can check which items are selected, and then propagate forward the
+selected items as additional data passed into our “internal” view function. See
+the full code for an example.
 
 Full code: `view <./code/htmx_patterns/views/redirects.py>`_, `template <./code/htmx_patterns/templates/redirect_after_post.html>`__
