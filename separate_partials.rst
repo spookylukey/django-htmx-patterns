@@ -75,9 +75,8 @@ Example `view code <./code/htmx_patterns/views/partials.py>`_, `main template <.
 
 Possible improvements to this pattern include:
 
-- `inline partials <./inline_partials.rst>`_.
-- `combining the two view functions <./separate_partials_single_view.rst>`_
-
+- `Inline partials <./inline_partials.rst>`_.
+- `Single view with actions combined <./actions.rst>`_
 
 Security issues
 ---------------

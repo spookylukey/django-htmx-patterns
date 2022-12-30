@@ -34,7 +34,7 @@ this in your ``base.html``:
        <script src="{% static 'js/htmx.min.js' %}"></script>
 
 
-Example `template <./code/htmx_patterns/templates/base.html>`_
+`Example template <./code/htmx_patterns/templates/base.html>`_.
 
 You should also see the notes about `post requests <./posts.rst>`_ for things
 you might want in your base templates.

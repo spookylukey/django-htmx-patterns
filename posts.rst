@@ -54,3 +54,9 @@ There are other options, like hooking into `htmx:beforeRequest
 <https://htmx.org/events/#htmx:beforeRequest>`_ and adding Javascript code
 described in the `Django CSRF docs
 <https://docs.djangoproject.com/en/4.1/howto/csrf/>`_
+
+
+Related patterns
+----------------
+
+* `Internal redirect after post <./redirect_after_post.rst>`_

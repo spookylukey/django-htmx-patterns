@@ -36,7 +36,7 @@ View code:
 
 Notice how we can have multiple actions, as above, by detecting different
 parameters present in the POST request. The HTML to make this work simply needs
-a POST form with two ``<button type=submit>`` or ``<input type="submit">``
+a POST form with two ``<button type="submit">`` or ``<input type="submit">``
 elements with different ``name`` attributes (because the clicked button’s
 ``name`` attribute will be included in the POST data):
 
@@ -63,11 +63,12 @@ are mutually exclusive, but that doesn’t have to be the case.
 
 Nice things about this include:
 
-- less “wiring” between different views. You can just do ``action=""``,
-  ``hx-post=""``, and ``HttpResponseRedirect("")`` and everything gets
-  posted/redirected to the same URL.
+- less “wiring” compared to using multiple views. You can just do ``action=""``,
+  and ``HttpResponseRedirect("")`` and everything gets posted/redirected to the
+  same URL.
 
-  Often you will see ``"."`` instead of the empty URL "". The only difference is
+  Instead of the empty string ``""`` (which represents the empty relative URL,
+  meaning “the current URL”), often you will see ``"."``. The only difference is
   that the relative URL ``.`` represents the current path **without query
   parameters**, so it will cause the query string to be stripped, which you may
   or may not want, while the empty URL (sometimes spelled as a single space in
@@ -75,7 +76,11 @@ Nice things about this include:
 
 - Less boilerplate and repetition of the initial parts of the view function.
 
-- The single “page” is represented by a single view function.
+- The single “page” is represented by a single view function. If you have
+  multiple views for this, those views are usually tightly coupled together, so
+  it helps when the source code reflects this, and you achieve better locality
+  of behaviour — similar to how template fragments/inline partials achieve the
+  same thing at the template layer.
 
 To htmx-ify this, we have a few very small tweaks to make:
 
@@ -145,4 +150,4 @@ Full code: `view <./code/htmx_patterns/views/actions.py>`_, `template <./code/ht
 
 For improvements to this pattern, see:
 
-* `Redirect-after-post patterns <./redirect_after_post.rst>`_
+* `Internal redirect after post pattern <./redirect_after_post.rst>`_
