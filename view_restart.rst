@@ -1,5 +1,5 @@
-Internal redirect after post
-============================
+View restart
+============
 
 This builds on the `Single view with actions combined <./actions.rst>`_ pattern.
 
@@ -57,7 +57,7 @@ happy)
 
 The UI is best illustrated with a screenshot:
 
-.. image:: images/redirect_after_post_screenshot.png
+.. image:: images/view_restart_screenshot.png
 
 
 This relies on some HTML that looks like this:
@@ -97,11 +97,11 @@ However, what should we do instead of the redirect?
   We could fix it up by modifying those lists, but this is easy to get wrong,
   especially with more complex cases.
 
-Instead, what we want to do is an “internal redirect”, in which we basically get
-the advantage of starting from scratch, but without an extra HTTP request. We do
-want the original request object to still be around and get applied when it
-comes to the ``for_htmx`` decorator.
-
+Instead, what we want to do is “restart” the view from the top. This is a bit
+like an “internal redirect”, in which we basically get the advantage of starting
+from scratch, but without an extra HTTP request. We do want the original request
+object to still be around and get applied when it comes to the ``for_htmx``
+decorator.
 
 We can thankfully do this really easily as follows:
 
@@ -172,10 +172,11 @@ Another way to look at this pattern is by an analogy with `the Elm Architecture
 <https://en.wikipedia.org/wiki/Elm_(programming_language)#The_Elm_Architecture>`_
 or “redux” architecture used in client side state handling. The idea is that we
 separate out model updates from UI rendering, so that instead of trying to patch
-up the UI at the same time as patching up the model, we just update the model,
-then re-render the UI based on the new model. In the same, way, our view
-function here doesn’t try to patch up the local variables after modifying DB
-state, it just starts over from the top.
+up the UI after we’ve modified the model (i.e. the state), we just update the
+model, then re-render the UI from scratch as essentially a pure function based
+on the new state. In the same, way, our view function here doesn’t try to patch
+up the local variables after modifying DB state, it just starts over from the
+top.
 
 An extension to this pattern is sometimes needed if there is extra information
 needed from the POST data that needs to be propagated. In the above example, we
@@ -186,4 +187,4 @@ that, we can check which items are selected, and then propagate forward the
 selected items as additional data passed into our “internal” view function. See
 the full code for an example.
 
-Full code: `view <./code/htmx_patterns/views/redirects.py>`_, `template <./code/htmx_patterns/templates/redirect_after_post.html>`__
+Full code: `view <./code/htmx_patterns/views/redirects.py>`_, `template <./code/htmx_patterns/templates/view_restart.html>`__

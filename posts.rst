@@ -59,4 +59,4 @@ described in the `Django CSRF docs
 Related patterns
 ----------------
 
-* `Internal redirect after post <./redirect_after_post.rst>`_
+* `View restart <./view_restart.rst>`_

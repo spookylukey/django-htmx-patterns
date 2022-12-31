@@ -150,4 +150,4 @@ Full code: `view <./code/htmx_patterns/views/actions.py>`_, `template <./code/ht
 
 For improvements to this pattern, see:
 
-* `Internal redirect after post pattern <./redirect_after_post.rst>`_
+* `View restart pattern <./view_restart.rst>`_

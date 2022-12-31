@@ -7,11 +7,11 @@ from htmx_patterns.utils import for_htmx, is_htmx, make_get_request
 
 
 @for_htmx(use_block_from_params=True)
-def redirect_after_post(request: HttpRequest):
-    return _redirect_after_post(request)
+def view_restart(request: HttpRequest):
+    return _view_restart(request)
 
 
-def _redirect_after_post(
+def _view_restart(
     request: HttpRequest,
     *,
     selected_happy_monsters: list[Monster] | None = None,
@@ -34,7 +34,7 @@ def _redirect_after_post(
                 monster.hug()
             selected_sad_monsters = []
         if is_htmx(request):
-            return _redirect_after_post(
+            return _view_restart(
                 make_get_request(request),
                 selected_sad_monsters=selected_sad_monsters,
                 selected_happy_monsters=selected_happy_monsters,
@@ -43,7 +43,7 @@ def _redirect_after_post(
 
     return TemplateResponse(
         request,
-        "redirect_after_post.html",
+        "view_restart.html",
         {
             "happy_monsters": happy_monsters,
             "sad_monsters": sad_monsters,

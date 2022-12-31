@@ -44,8 +44,8 @@ urlpatterns = [
     ),
     path(
         "redirect-after-post/",
-        redirects.redirect_after_post,
-        name="redirect_after_post",
+        redirects.view_restart,
+        name="view_restart",
     ),
     path("admin/", admin.site.urls),
 ]
