@@ -5,7 +5,7 @@ Also known as `“template fragments”
 <https://htmx.org/essays/template-fragments/>`_.
 
 This improves on the patterns used for `a single view with
-separate partial files <./separate_partials_single_view.st>`_.
+separate partial files <./separate_partials_single_view.rst>`_.
 
 Having partial templates in separate files makes the logic harder to follow.
 Thanks to `django-render-block
