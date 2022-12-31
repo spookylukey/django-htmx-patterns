@@ -43,7 +43,7 @@ urlpatterns = [
         name="multiple_actions",
     ),
     path(
-        "redirect-after-post/",
+        "view-restart/",
         redirects.view_restart,
         name="view_restart",
     ),
