@@ -15,7 +15,7 @@ My aims are to document and share:
 2. Some enhancements we can make with a few utilities
 
 The code presented depends only on Django and htmx, unless otherwise noted. I
-wont be packaging it up as a library. It is instead being released into the
+won’t be packaging it up as a library. It is instead being released into the
 public domain, and you are encouraged to copy-paste it for your own needs. (See
 the “Approach” docs for why).
 
