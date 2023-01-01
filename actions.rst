@@ -86,7 +86,7 @@ To htmx-ify this, we have a few very small tweaks to make:
 
 * In the template, add some blocks (or partials) for the parts we need to render separately.
 * In the template, add some ``hx-`` attributes
-* Don’t do a redirect for htmx requests
+* Don’t do a redirect for htmx requests (or use a `view restart <./view_restart.rst>`_)
 * For the htmx POST request, render a part of the template.
 
 Here I will do this using our previous `for_htmx decorator with inline partials <./inline_partials.rst>`_ pattern.
