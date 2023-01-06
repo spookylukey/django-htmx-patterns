@@ -188,4 +188,4 @@ that, we can check which items are selected, and then propagate forward the
 selected items as additional data passed into our “internal” view function. See
 the full code for an example.
 
-Full code: `view <./code/htmx_patterns/views/redirects.py>`_, `template <./code/htmx_patterns/templates/view_restart.html>`__
+Full code: `view <./code/htmx_patterns/views/restarts.py>`_, `template <./code/htmx_patterns/templates/view_restart.html>`__

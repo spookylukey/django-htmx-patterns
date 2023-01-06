@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from . import views
-from .views import actions, headers, partials, posts, redirects
+from .views import actions, headers, partials, posts, restarts
 
 urlpatterns = [
     path("", views.home),
@@ -44,7 +44,7 @@ urlpatterns = [
     ),
     path(
         "view-restart/",
-        redirects.view_restart,
+        restarts.view_restart,
         name="view_restart",
     ),
     path("admin/", admin.site.urls),
