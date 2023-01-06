@@ -11,10 +11,11 @@ HTTP redirect to another or the same page. This serves two purposes:
    prompt the user about doing this) — it will just load the page, which is
    usually what we want.
 
-2. By starting a new request, any data loaded from the database will be
-   discarded and we will start again. This is important as the handling of the
-   POST request may have changed data such that already loaded data is invalid
-   or partially inconsistent.
+2. By starting a new request, any data that the view function has loaded from
+   the database will be discarded and the new request will trigger a fresh run
+   of the view function. This is important as the handling of the POST request
+   may have changed data such that already loaded data is invalid or partially
+   inconsistent.
 
 
 When using htmx, the first of these is not important, as a browser will never be
