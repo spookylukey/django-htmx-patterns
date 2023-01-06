@@ -37,6 +37,7 @@ Contents
 * `Inline partials <./inline_partials.rst>`_
 * `Single view with actions combined <./actions.rst>`_
 * `View restart <./view_restart.rst>`_
+* `django-functest patterns <./django_functest.rst>`_
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 
@@ -47,13 +48,6 @@ My example code includes sad and happy monsters that can be hugged or kicked to
 change their state. Please note that I do not endorse the kicking of monsters,
 nor advise hugging them. No real monsters were harmed during the making of this
 repo.
-
-
-TODO
-----
-
-* Patterns for use with `django-functest
-  <https://django-functest.readthedocs.io/en/latest/>`_
 
 
 Code folder
