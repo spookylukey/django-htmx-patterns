@@ -58,13 +58,13 @@ So our template looks like this:
    {% endblock %}
 
 
-For htmx requests we must pull out the ``page-and-paging-controls`` block and
-render just that bit.
 
 View code — basic version
 -------------------------
 
-The simplest (if slightly ugly) version of our view code looks like this:
+For htmx requests we must pull out the ``page-and-paging-controls`` block and
+render just that bit. The simplest (if slightly ugly) version of our view code
+looks like this:
 
 
 .. code-block:: python
@@ -274,8 +274,8 @@ The only significant downside to this pattern that I can see is a potential
 security issue — the same security concerns as mentioned above apply, but more
 so, since we are now giving the client direct and complete control over which
 block gets rendered, and they can choose from any in the template (if they know
-name, and we should assume they do). The same mitigation techniques can be used,
-however, so in most cases this wouldn’t put me off the pattern.
+the name, and we should assume they do). The same mitigation techniques can be
+used, however, so in most cases this wouldn’t put me off the pattern.
 
 
 
