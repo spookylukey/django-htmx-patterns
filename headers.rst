@@ -16,7 +16,7 @@ for htmx requests compared to normal requests:
 
        return TemplateResponse(request, "headers.html", {})
 
-Example `view code <./code/htmx_patterns/views/headers.py>`_, `template <./code/htmx_patterns/templates/headers.html>`_, `live demo <https://django-htmx-patterns.spookylukey1.repl.co/headers/>`__
+Example `view code <./code/htmx_patterns/views/headers.py>`_, `template <./code/htmx_patterns/templates/headers.html>`_
 
 
 Links

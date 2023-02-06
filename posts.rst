@@ -28,7 +28,7 @@ In this case the whole of the form, including the CSRF token and other
 parameters like ``howmany``, get submitted as part of the POST request, and you
 will have no problems.
 
-Example `view code <./code/htmx_patterns/views/posts.py>`_, `template <./code/htmx_patterns/templates/simple_post_form.html>`__, `live demo <https://django-htmx-patterns.spookylukey1.repl.co/simple-post-form/>`__.
+Example `view code <./code/htmx_patterns/views/posts.py>`_, `template <./code/htmx_patterns/templates/simple_post_form.html>`__
 
 Note that the normal pattern of `POST/redirect/GET
 <https://en.wikipedia.org/wiki/Post/Redirect/Get>`_, which is needed to avoid
@@ -47,8 +47,7 @@ into the ``<body>`` element, usually in a ``base.html`` template:
 
 Example `view code <./code/htmx_patterns/views/posts.py>`_, `template
 <./code/htmx_patterns/templates/post_without_form.html>`__, `base template
-<./code/htmx_patterns/templates/base.html>`_, `live demo <https://django-htmx-patterns.spookylukey1.repl.co/post-without-form/>`__.
-
+<./code/htmx_patterns/templates/base.html>`_
 
 There are other options, like hooking into `htmx:beforeRequest
 <https://htmx.org/events/#htmx:beforeRequest>`_ and adding Javascript code

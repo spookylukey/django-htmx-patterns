@@ -7,7 +7,7 @@ use `htmx <https://htmx.org/>`_.
 
 The docs are intended to be viewed on GitHub:
 https://github.com/spookylukey/django-htmx-patterns/ and the code can be run
-locally or on repl.it (see below)
+locally if needed.
 
 My aims are to document and share:
 
@@ -54,10 +54,7 @@ Code folder
 -----------
 
 In the `code folder <./code/>`_ is a demo app which has full working examples of
-everything in the docs. You can see it live on `repl.it <https://replit.com/>`_
-at https://django-htmx-patterns.spookylukey1.repl.co and you can fork it from
-https://replit.com/@spookylukey1/django-htmx-patterns to play around with the
-code.
+everything in the docs.
 
 To install locally, use a virtualenv, and then either use poetry or see the
 code/requirements.txt file for pip.
