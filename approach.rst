@@ -23,8 +23,9 @@ there are even more. To see and extract good htmx patterns, you need to:
 Using CBVs will seriously hinder you in both these.
 
 In my experience so far, the best patterns for using htmx are likely to be
-project specific. In addition, while both Django and htmx are mature, the best
-patterns to use for the combination of these two is still an area for growth and
+project specific — most of the ones documented here have worked across several
+projects, but may not fit everywhere. While both Django and htmx are mature, the
+best patterns for the combination of these two is still an area for growth and
 needs refining. So for now I’m suggesting that if you like anything you see in
 this repo, you should:
 
