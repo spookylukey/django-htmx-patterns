@@ -14,7 +14,7 @@ Using the CDN:
 
    <html>
      <head>
-       <script src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
+       <script defer src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
        ...
 
 
@@ -31,7 +31,7 @@ this in your ``base.html``:
    {% load static %}
    <html lang="en">
      <head>
-       <script src="{% static 'js/htmx.min.js' %}"></script>
+       <script defer src="{% static 'js/htmx.min.js' %}"></script>
 
 
 `Example template <./code/htmx_patterns/templates/base.html>`_.

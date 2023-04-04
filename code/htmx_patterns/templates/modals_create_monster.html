@@ -1,0 +1,19 @@
+
+<dialog id="dialog-main" data-onload-showmodal>
+
+  {% block dialog-contents %}
+    <h1>Add a monster
+      <form method="dialog" style="float: right; padding: 0; margin: 0;"><button style="margin: 0;">Close</button></form>
+    </h1>
+    <form
+      hx-post="{{ request.get_full_path }}"
+      hx-target="#dialog-main"
+      hx-vals='{"use_block": "dialog-contents"}'
+      hx-swap="innerHTML"
+    >
+      {{ form.as_p }}
+
+      <button type="submit">Add</button>
+    </form>
+  {% endblock %}
+</dialog>

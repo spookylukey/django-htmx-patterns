@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from . import views
-from .views import actions, headers, partials, posts, restarts
+from .views import actions, headers, modals, partials, posts, restarts
 
 urlpatterns = [
     path("", views.home),
@@ -46,6 +46,16 @@ urlpatterns = [
         "view-restart/",
         restarts.view_restart,
         name="view_restart",
+    ),
+    path(
+        "modals-main/",
+        modals.main,
+        name="modals_main",
+    ),
+    path(
+        "modals-create-monster/",
+        modals.create_monster,
+        name="modals_create_monster",
     ),
     path("admin/", admin.site.urls),
 ]

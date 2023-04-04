@@ -38,6 +38,7 @@ Contents
 * `Single view with actions combined <./actions.rst>`_
 * `View restart <./view_restart.rst>`_
 * `django-functest patterns <./django_functest.rst>`_
+* `Modals <./modals.rst>`_
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 

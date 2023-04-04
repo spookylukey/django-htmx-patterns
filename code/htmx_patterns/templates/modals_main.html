@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block extrahead %}
+  <script defer src="{% static 'js/modals.js' %}"></script>
+  <link href="{% static 'css/modals.css' %}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+  {% block monster-list %}
+    <div
+      id="monster-list"
+      hx-get="."
+      hx-trigger="monsterCreated from:body"
+      hx-vals='{"use_block": "monster-list"}'
+      hx-target="#monster-list"
+      hx-swap="outerHTML"
+    >
+      {% if monsters %}
+        <table>
+          <tr>
+            <th>Name</th>
+            <th>Happy?</th>
+          </tr>
+          {% for monster in monsters %}
+            <tr>
+              <td>{{ monster.name }}</td>
+              <td>{{ monster.is_happy|yesno:"Yes,No" }}</td>
+            </tr>
+          {% endfor %}
+        </table>
+      {% else %}
+        <p>There are no monsters</p>
+      {% endif %}
+    </div>
+  {% endblock %}
+
+  <button
+    hx-trigger="click"
+    hx-get="{% url 'modals_create_monster' %}"
+    hx-target="body"
+    hx-swap="beforeend"
+  >
+    Add a monster
+  </button>
+{% endblock %}
