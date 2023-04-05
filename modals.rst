@@ -11,7 +11,7 @@ This example will be more full-featured than the one in the htmx docs, and
 considers the case where the modal includes a form that may itself need server
 round-trips before it closes.
 
-Our examples will be a page that lists monsters. We then want a button that will
+Our example will be a page that lists monsters. We then want a button that will
 load a dialog for adding a new monster. The HTML looks like this:
 
 
