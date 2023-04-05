@@ -36,5 +36,8 @@ this in your ``base.html``:
 
 `Example template <./code/htmx_patterns/templates/base.html>`_.
 
+You can also use other bundlers like webpack etc. I usually use
+`django-compressor <https://django-compressor.readthedocs.io/en/stable/>`_.
+
 You should also see the notes about `post requests <./posts.rst>`_ for things
 you might want in your base templates.

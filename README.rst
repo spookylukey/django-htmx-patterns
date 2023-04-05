@@ -42,6 +42,16 @@ Contents
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 
+Requirements
+------------
+
+* `Django <https://www.djangoproject.com/>`_
+* `htmx <https://htmx.org/>`_ (see `Base template <./base_template.rst>`_ for suggested installation docs)
+* The nicest patterns here require `django-render-block <https://github.com/clokep/django-render-block>`_::
+
+    pip install django-render-block
+
+
 Monsters
 --------
 
