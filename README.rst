@@ -42,6 +42,24 @@ Contents
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 
+tl;dr
+-----
+
+The biggest contributions in this repo are:
+
+* `inline partials with block selection in the template
+  <https://github.com/spookylukey/django-htmx-patterns/blob/master/inline_partials.rst#block-selection-in-the-template>`_.
+
+  This is a pattern which allows you to keep the parts of the page together for
+  great “locality of behaviour”, and avoid the view code having to know anything
+  about which template fragments/partials are being used. Template code changes
+  for htmx are usually a matter of wrapping some parts of a template in a Django
+  template ``block`` and adding standard htmx attributes. View code changes for
+  htmx are often just adding a single decorator on the view function:
+  ``@for_htmx(use_block_from_params=True)``.
+
+  This pattern makes a huge difference to htmx usability in Django.
+
 Requirements
 ------------
 
