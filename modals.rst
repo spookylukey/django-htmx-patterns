@@ -11,7 +11,7 @@ This example will be more full-featured than the one in the htmx docs, and
 considers the case where the modal includes a form that may itself need server
 round-trips before it closes.
 
-Our examples will be an admin page that lists monsters. We then want a button that will
+Our examples will be a page that lists monsters. We then want a button that will
 load a dialog for adding a new monster. The HTML looks like this:
 
 
@@ -146,15 +146,15 @@ To respond to the ``closeModal`` trigger, we need this Javascript:
     });
 
 To respond to the ``monsterCreated`` event, we need the relevant part of the
-main page to look something like this, using our normal inline partials pattern
+main page to look something like this, using our normal inline partials pattern:
 
 .. code-block:: html
 
    {% block monster-list %}
      <div
          id="monster-list"
-         hx-get="."
          hx-trigger="monsterCreated from:body"
+         hx-get="."
          hx-vals='{"use_block": "monster-list"}'
          hx-target="#monster-list"
          hx-swap="outerHTML"
@@ -166,13 +166,21 @@ main page to look something like this, using our normal inline partials pattern
      </div>
    {% endblock %}
 
+In English: “when the ``monsterCreated`` event is triggered on the document
+body, then do a GET request to the current URL, with additional query parameter
+``use_block=monster-list``, which asks the server to render only the
+``monster-list`` block; the result should be use to replace the outerHTML of the
+``#monster-list`` DOM element”.
+
+This again requires ``@for_htmx(use_block_from_params=True)`` on the list view.
+
 
 Tips
 ----
 
-Dialog elements are now very well supported, and do a lot of things for us. I’ve
-collected a few more tips if you want to improve the look, and add support for
-transitions.
+Dialog elements are now very well supported, and do a lot of things for us, like
+focus and accessibility. I’ve collected a few more tips if you want to improve
+the look, and add support for transitions.
 
 Closing
 ~~~~~~~
