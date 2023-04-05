@@ -66,8 +66,13 @@ Code folder
 In the `code folder <./code/>`_ is a demo app which has full working examples of
 everything in the docs.
 
-To install locally, use a virtualenv, and then either use poetry or see the
-code/requirements.txt file for pip.
+To install locally, create and activate a virtualenv, and then do::
+
+  cd code
+  pip install -r requirements.txt
+  python manage.py migrate
+  python manage.py runserver
+
 
 Feedback
 --------
