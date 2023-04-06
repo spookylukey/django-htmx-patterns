@@ -1,5 +1,5 @@
-Modals
-======
+Modal dialogs
+=============
 
 Modal dialogs are a common UI element that you may need to create using htmx.
 The `htmx modal dialog docs <https://htmx.org/examples/modal-custom/>`_ provide
