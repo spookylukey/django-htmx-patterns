@@ -3,7 +3,7 @@ Django + htmx patterns
 
 This repo is a rough-and-ready compilation of the patterns I’m using and
 developing when writing `Django <https://www.djangoproject.com/>`_ projects that
-use `htmx <https://htmx.org/>`_.
+use `htmx <https://htmx.org/>`_, with complete example code.
 
 The docs are intended to be viewed on GitHub:
 https://github.com/spookylukey/django-htmx-patterns/ and the code can be run
