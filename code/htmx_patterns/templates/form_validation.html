@@ -1,0 +1,21 @@
+{% extends "base_bulma.html" %}
+
+{% block main %}
+  <h1 class="title">Add a monster</h1>
+  <form method="POST" action=".">
+    {% csrf_token %}
+
+    {% if form.errors %}
+      <p>There were some problems with your input:</p>
+    {% endif %}
+    {{ form }}
+
+    <div class="field is-horizontal">
+      <div class="field-label">
+      </div>
+      <div class="field-body">
+        <button class="is-primary" type="submit">Add</button>
+      </div>
+    </div>
+  </form>
+{% endblock %}

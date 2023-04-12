@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from . import views
-from .views import actions, headers, modals, partials, posts, restarts
+from .views import actions, forms, headers, modals, partials, posts, restarts
 
 urlpatterns = [
     path("", views.home),
@@ -11,11 +11,15 @@ urlpatterns = [
     path("post-without-form/", posts.post_without_form, name="post_without_form"),
     path("post-form-endpoint/", posts.post_form_endpoint, name="post_form_endpoint"),
     path(
-        "toggle-with-separate-partials/", partials.toggle_with_separate_partials, name="toggle_with_separate_partials"
+        "toggle-with-separate-partials/",
+        partials.toggle_with_separate_partials,
+        name="toggle_with_separate_partials",
     ),
     path("toggle-item/<int:monster_id>/", partials.toggle_item, name="toggle_item"),
     path(
-        "paging-with-separate-partials/", partials.paging_with_separate_partials, name="paging_with_separate_partials"
+        "paging-with-separate-partials/",
+        partials.paging_with_separate_partials,
+        name="paging_with_separate_partials",
     ),
     path(
         "paging-with-separate-partials-improved/",
@@ -56,6 +60,11 @@ urlpatterns = [
         "modals-create-monster/",
         modals.create_monster,
         name="modals_create_monster",
+    ),
+    path(
+        "form-validation/",
+        forms.form_validation,
+        name="form_validation",
     ),
     path("admin/", admin.site.urls),
 ]

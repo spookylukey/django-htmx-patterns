@@ -1,4 +1,4 @@
 *.rst.html
 db.sqlite3
 *.pyc
-
+_static

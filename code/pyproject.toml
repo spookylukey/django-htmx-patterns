@@ -1,0 +1,13 @@
+[tool.black]
+line-length = 120
+# required-version = '22.1.0' # see https://github.com/psf/black/issues/2493
+target-version = ['py39']
+
+
+[tool.isort]
+line_length = 120
+profile = "black"
+multi_line_output = 3
+
+[tool.ruff]
+line-length = 120

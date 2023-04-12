@@ -1,4 +1,8 @@
 Django>=4.1
-django-render-block
+django-render-block>=0.9.1
 Faker>=14
 IPython
+django-compressor>=4.3
+django-libsass>=0.9
+django-widget-tweaks>=1.4.12
+boltons

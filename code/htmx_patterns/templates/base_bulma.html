@@ -1,9 +1,12 @@
 {% load static %}
+{% load compress %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <title>Django htmx patterns</title>
-    <link rel="stylesheet" href="https://cdn.rawgit.com/Chalarangelo/mini.css/v3.0.1/dist/mini-default.min.css">
+    {% compress css %}
+      <link rel="stylesheet" type="text/x-scss" href="{% static 'css/base_bulma.scss' %}">
+    {% endcompress %}
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script defer src="{% static 'js/htmx.min.js' %}"></script>
     {% block extrahead %}
@@ -15,6 +18,8 @@
         <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
       {% endfor %}</ul>
     {% endif %}
-    {% block body %}{% endblock %}
+    <main>
+      {% block main %}{% endblock %}
+    </main>
   </body>
 </html>

@@ -1,0 +1,44 @@
+{% load widget_tweaks %}
+{{ errors }}
+{% if errors and not fields %}
+  <div>{% for field in hidden_fields %}{{ field }}{% endfor %}</div>
+{% endif %}
+{% for field, errors in fields %}
+  <div{% with classes=field.css_classes %} class="field is-horizontal {{ classes }}"{% endwith %}>
+    {% if field.label %}
+      <div class="field-label is-normal">
+        {{ field.label_tag }}
+      </div>
+    {% endif %}
+    <div class="field-body">
+      {% with error_class=errors|yesno:"is-danger,," %}
+        <div class="field">
+          <div class="control">
+            {% if field|widget_type == "select" %}
+              <div class="select {{ error_class }}">
+                {{ field }}
+              </div>
+            {% else %}
+              {{ field|add_class:error_class }}
+            {% endif %}
+          </div>
+          {% if field.help_text %}
+            <p class="help">{{ field.help_text|safe }}</p>
+          {% endif %}
+          {% if errors %}
+            <div class="help is-danger">
+              {{ errors }}
+            </div>
+          {% endif %}
+        </div>
+      {% endwith %}
+    </div>
+
+  </div>
+  {% if forloop.last %}
+    {% for field in hidden_fields %}{{ field }}{% endfor %}
+  {% endif %}
+{% endfor %}
+{% if not fields and not errors %}
+  {% for field in hidden_fields %}{{ field }}{% endfor %}
+{% endif %}
