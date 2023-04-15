@@ -1,0 +1,44 @@
+{% load widget_tweaks %}
+
+<div
+  {% with classes=field.css_classes %} class="field is-horizontal {{ classes }}"
+  {% endwith %}
+  id="form-row-{{ field.name }}"
+  {% if do_htmx_validation and field|widget_type != "fileinput" %}
+    hx-post="."
+    hx-vals='{"_validate_field": "{{ field.name }}" }'
+    hx-trigger="change from:#form-row-{{ field.name }}"
+    hx-params="{{ field.name }},_validate_field"
+    hx-target="this"
+    hx-swap="outerHTML"
+  {% endif %}
+>
+  {% if field.label %}
+    <div class="field-label is-normal">
+      {{ field.label_tag }}
+    </div>
+  {% endif %}
+  <div class="field-body">
+    {% with error_class=errors|yesno:"is-danger,," %}
+      <div class="field">
+        <div class="control">
+          {% if field|widget_type == "select" %}
+            <div class="select {{ error_class }}">
+              {{ field }}
+            </div>
+          {% else %}
+            {{ field|add_class:error_class }}
+          {% endif %}
+        </div>
+        {% if field.help_text %}
+          <p class="help">{{ field.help_text|safe }}</p>
+        {% endif %}
+        {% if errors %}
+          <div class="help is-danger">
+            {{ errors }}
+          </div>
+        {% endif %}
+      </div>
+    {% endwith %}
+  </div>
+</div>

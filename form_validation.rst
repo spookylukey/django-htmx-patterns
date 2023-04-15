@@ -310,8 +310,156 @@ Result:
 htmx it!
 --------
 
-TODO!
+Now at last we’ve got the starting point where we want to apply htmx. We want this behaviour:
+
+- we shouldn’t display any validation errors initially
+- we should trigger server-side validation after a user leaves a field, but only for that field, not for the rest of the form.
+- we should avoid validation that relate to multiple fields, since that is likely to be confusing when the user is part way through.
+- we mustn’t do things like repeatedly upload files when triggering validation.
+
+Extract a partial
+~~~~~~~~~~~~~~~~~
+
+We start by pulling out a partial from our ``forms/bulma/div.html`` template, so that we can easily render a single row of the form. We can call this ``forms/bulma/field_row.html``.
+
+
+Add the htmx attributes
+~~~~~~~~~~~~~~~~~~~~~~~
+
+We then need to add an ID to the outer ``<div>`` in this partial so that we can easily target it for htmx requests, and we need to add htmx attributes. We’re going to add them conditionally so that we can disable this behaviour easily if we need to. Our ``field_row.html`` template now looks like this:
+
+.. code-block:: html+django
+
+   <div
+     {% with classes=field.css_classes %} class="field is-horizontal {{ classes }}"
+     {% endwith %}
+     id="form-row-{{ field.name }}"
+     {% if do_htmx_validation and field|widget_type != "fileinput" %}
+       hx-post="."
+       hx-vals='{"_validate_field": "{{ field.name }}" }'
+       hx-trigger="change from:#form-row-{{ field.name }}"
+       hx-params="{{ field.name }},_validate_field"
+       hx-target="this"
+       hx-swap="outerHTML"
+     {% endif %}
+   >
+     {# etc #}
+   </div>
+
+To break that down:
+
+- We’ve added an ID we can target
+- We’re going to add the htmx stuff only if the flag is true, and if we’re not a file upload widget (which would not end well)
+- We’re going to POST back data to the same URL (we’ll fix up the view code shortly).
+- We’re adding a special input ``_validate_field`` which tells the server which field to validate. This is needed because of corner cases like checkboxes which return no data when they are not selected.
+- We want this htmx request to be triggered on any field change from the div we’re in.
+- In the request POST data, we want to include data only from the current field (there is no point sending and processing other fields, especially not file uploads etc.)
+- We’re going to swap out the current div with the new one returned by the server.
+
+Fix up the form renderer and mixin
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+To avoid mixing logic from different layers later, we’ll define template names as attributes on the form renderer. So we now need to add this:
+
+.. code-block:: python
+
+   class BulmaFormRenderer(TemplatesSetting):
+       ...
+       single_field_row_template = "forms/bulma/field_row.html"
+
+   class BulmaFormMixin:
+       ...
+       do_htmx_validation = True
+
+       def get_context(self, *args, **kwargs):
+           return super().get_context(*args, **kwargs) | {
+               "do_htmx_validation": self.do_htmx_validation,
+               "single_field_row_template": self.renderer.single_field_row_template,
+            }
+
+(I just made up the names ``single_field_row_template`` and ``do_htmx_validation``, you can choose something else).
+
+And the main loop in ``forms/bulma/div.html`` becomes:
+
+.. code-block:: html+django
+
+   {% for field, errors in fields %}
+      {% include single_field_row_template with field=field errors=errors %}
+      {% if forloop.last %}
+        {% for field in hidden_fields %}{{ field }}{% endfor %}
+      {% endif %}
+   {% endfor %}
+
+
+Add the view logic
+~~~~~~~~~~~~~~~~~~
+
+We now need to change the view function to handle this validation case:
+
+- we should **not** attempt to save the form!
+- we should instead do validation, and render a single row of the form (with any errors), and return that.
+
+To avoid complicating the main view logic, I’m implementing this as a decorator we can add to the view:
+
+.. code-block:: python
+
+   @htmx_form_validate(form_class=CreateMonsterForm)
+   def create_monster(request):
+       ...
+
+This has the downside that we have to repeat the form class again outside the view body, but sometimes this can be useful – I have cases where I need the form used for validation to be slightly different from the real one.
+
+The ``htmx_form_validate`` function looks like this:
+
+.. code-block:: python
+
+   def htmx_form_validate(*, form_class: type):
+       """
+       Instead of a normal view, just do htmx validation using the given form class,
+       for a single field and return the single div that needs to be replaced.
+       Normally the form class will be the same class used in the view body.
+       """
+
+       def decorator(view_func):
+           @wraps(view_func)
+           def wrapper(request, *args, **kwargs):
+               if (
+                   request.method == "POST"
+                   and "Hx-Request" in request.headers
+                   and (htmx_validation_field := request.POST.get("_validate_field", None))
+               ):
+                   form = _build_validation_form(form_class, request.POST, htmx_validation_field)
+                   form.is_valid()  # trigger validation
+                   return HttpResponse(render_single_field_row(form, htmx_validation_field))
+               return view_func(request, *args, **kwargs)
+
+           return wrapper
+
+       return decorator
+
+It simply checks for an htmx request, then pulls out the ``_validate_field`` parameter to decide which field to render and return.
+
+The ``_build_validation_form`` utility deals with some corner cases for us, and the ``render_single_field_row`` utility is pretty simple – see the `full code for the details <./code/htmx_patterns/form_utils.py>`_
+
+That’s it we’re done – the validation will trigger as soon as a field is changed, and display server-side validation in the form:
+
+.. image:: images/htmx_form_validation.gif
+
+
+Code
+----
+
+- `view <./code/htmx_patterns/views/forms.py>`__
+- `decorator <./code/htmx_patterns/form_utils.py>`__
+- `form renderer <./code/htmx_patterns/form_renderers.py>`__
+- `page template <./code/htmx_patterns/templates/form_validation.html>`__
+- `form main template <./code/htmx_patterns/templates/forms/bulma/div.html>`__
+- `form field row template <./code/htmx_patterns/templates/forms/bulma/field_row.html>`__
+- `CSS <./code/htmx_patterns/static/css/base_bulma.scss>`__
+
+
 
 Tips
 ----
-Inherit from TemplateSettings, not DjangoTemplates, to get TEMPLATES customisations, and also to get reloading of templates to work with dev server, which seems not to happen for DjangoTemplates
+
+* Make your form renderer inherit from TemplateSettings, not DjangoTemplates, to get TEMPLATES customisations, and also to get reloading of templates to work with dev server, which seems not to happen for DjangoTemplates

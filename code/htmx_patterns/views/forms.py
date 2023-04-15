@@ -7,6 +7,7 @@ from django.template.response import TemplateResponse
 
 from htmx_patterns.form_renderers import BulmaFormMixin
 
+from ..form_utils import htmx_form_validate
 from ..models import Monster
 
 
@@ -18,6 +19,7 @@ class CreateMonsterForm(BulmaFormMixin, ModelForm):
         fields = ["name", "is_happy", "date_of_birth", "type"]
 
 
+@htmx_form_validate(form_class=CreateMonsterForm)
 def form_validation(request):
     if request.method == "POST":
         form = CreateMonsterForm(request.POST)
