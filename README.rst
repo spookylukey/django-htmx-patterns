@@ -39,6 +39,7 @@ Contents
 * `View restart <./view_restart.rst>`_
 * `django-functest patterns <./django_functest.rst>`_
 * `Modal dialogs <./modals.rst>`_
+* `Form validation <./form_validation.rst>`_
 
 This is a work in progress, I’ll try to keep it up to date. PRs welcome.
 

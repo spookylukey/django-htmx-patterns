@@ -47,7 +47,7 @@ Rather than focus on just the htmx/Django techniques, I’m doing a fuller examp
 
 I’ll include some of the main things you’ll need on this page, with some brief notes for the techniques used. For full details the code is available in the `code folder <./code/>`_ as always.
 
-For styling this demo, I chose to use `Bulma <https://bulma.io/>`_ as an example of a popular, real world CSS framework that has a decent story regarding form rendering, but one I haven’t actually used before. I didn’t pick because I knew it was easy, to make this more realistic! Our aim is that we’ll be able to do the styling work once, and re-use it for all forms in our project. For a different CSS framework, most of what is written here should apply.
+For styling this demo, I chose to use `Bulma <https://bulma.io/>`_ as an example of a popular, real world CSS framework that has a decent story regarding form layout – but one I haven’t actually used before, to make this a more realistic exercise! Our aim is that we’ll be able to do the template/styling work once, and re-use it for all forms in our project. For a different CSS framework, most of what is written here should apply.
 
 Bulma
 ~~~~~
