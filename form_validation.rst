@@ -456,7 +456,7 @@ Code
 - `form main template <./code/htmx_patterns/templates/forms/bulma/div.html>`__
 - `form field row template <./code/htmx_patterns/templates/forms/bulma/field_row.html>`__
 - `CSS <./code/htmx_patterns/static/css/base_bulma.scss>`__
-
+- You can also see the changes needed just for the htmx part `here <https://github.com/spookylukey/django-htmx-patterns/commit/dce54298c68dc0a52fe465578d78256dd8df9faf>`_
 
 
 Tips
