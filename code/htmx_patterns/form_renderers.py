@@ -8,7 +8,7 @@ class BulmaFormRenderer(TemplatesSetting):
 
 class BulmaFormMixin:
     default_renderer = BulmaFormRenderer()
-    do_htmx_validation = True
+    do_htmx_validation = False  # Set to True in subclasses
 
     def __init__(self, *args, **kwargs) -> None:
         return super().__init__(*args, label_suffix="", **kwargs)

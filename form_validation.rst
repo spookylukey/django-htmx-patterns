@@ -341,10 +341,10 @@ We then need to add an ID to the outer ``<div>`` in this partial so that we can 
      {% endwith %}
      id="form-row-{{ field.name }}"
      {% if do_htmx_validation and field|widget_type != "fileinput" %}
-       hx-post="."
+       hx-get="."
        hx-vals='{"_validate_field": "{{ field.name }}" }'
        hx-trigger="change from:#form-row-{{ field.name }}"
-       hx-params="{{ field.name }},_validate_field"
+       hx-include="#form-row-{{ field.name }}"
        hx-target="this"
        hx-swap="outerHTML"
      {% endif %}
@@ -356,10 +356,11 @@ To break that down:
 
 - We’ve added an ID we can target
 - We’re going to add the htmx stuff only if the flag is true, and if we’re not a file upload widget (which would not end well)
-- We’re going to POST back data to the same URL (we’ll fix up the view code shortly).
+- We’re doing a GET to avoid the possibility of our form being submitted i.e. we are retrieving form validation errors, not submitting a change.
+- We’re making a request to the same URL (we’ll fix up the view code shortly).
 - We’re adding a special input ``_validate_field`` which tells the server which field to validate. This is needed because of corner cases like checkboxes which return no data when they are not selected.
 - We want this htmx request to be triggered on any field change from the div we’re in.
-- In the request POST data, we want to include data only from the current field (there is no point sending and processing other fields, especially not file uploads etc.)
+- In the request GET data, we want to include data only from the current field (there is no point sending and processing other fields, especially not file uploads etc.)
 - We’re going to swap out the current div with the new one returned by the server.
 
 Fix up the form renderer and mixin
@@ -375,7 +376,7 @@ To avoid mixing logic from different layers later, we’ll define template names
 
    class BulmaFormMixin:
        ...
-       do_htmx_validation = True
+       do_htmx_validation = False
 
        def get_context(self, *args, **kwargs):
            return super().get_context(*args, **kwargs) | {
@@ -384,6 +385,13 @@ To avoid mixing logic from different layers later, we’ll define template names
             }
 
 (I just made up the names ``single_field_row_template`` and ``do_htmx_validation``, you can choose something else).
+
+``do_htmx_validation`` defaults to ``False`` so that it is opt in, because we will also need to add logic to each view to make it work — we don’t want forms pointlessly sending validation requests that never get answered. So we’ll also need:
+
+.. code-block:: python
+
+   class CreateMonsterForm:
+       do_htmx_validation = True
 
 And the main loop in ``forms/bulma/div.html`` becomes:
 
@@ -405,7 +413,7 @@ We now need to change the view function to handle this validation case:
 - we should **not** attempt to save the form!
 - we should instead do validation, and render a single row of the form (with any errors), and return that.
 
-To avoid complicating the main view logic, I’m implementing this as a decorator we can add to the view:
+We can implement this as a decorator we can add to the view:
 
 .. code-block:: python
 
@@ -413,7 +421,13 @@ To avoid complicating the main view logic, I’m implementing this as a decorato
    def create_monster(request):
        ...
 
-This has the downside that we have to repeat the form class again outside the view body, but sometimes this can be useful – I have cases where I need the form used for validation to be slightly different from the real one.
+I’m doing this:
+
+- so we can avoid creating a new URL just for the validation, and avoid having to pass that URL into the form – we can just use ``hx-get="."`` as above.
+- so we can avoid complicating the view with the details
+- to have a very easy way of adding this to other views.
+
+This decorator method has the downside that we have to repeat the form class again outside the view body, but sometimes this can be useful – I have cases where I need the form used for validation to be slightly different from the real one.
 
 The ``htmx_form_validate`` function looks like this:
 
@@ -430,11 +444,11 @@ The ``htmx_form_validate`` function looks like this:
            @wraps(view_func)
            def wrapper(request, *args, **kwargs):
                if (
-                   request.method == "POST"
+                   request.method == "GET"
                    and "Hx-Request" in request.headers
-                   and (htmx_validation_field := request.POST.get("_validate_field", None))
+                   and (htmx_validation_field := request.GET.get("_validate_field", None))
                ):
-                   form = _build_validation_form(form_class, request.POST, htmx_validation_field)
+                   form = form_class(request.GET)
                    form.is_valid()  # trigger validation
                    return HttpResponse(render_single_field_row(form, htmx_validation_field))
                return view_func(request, *args, **kwargs)
@@ -445,7 +459,7 @@ The ``htmx_form_validate`` function looks like this:
 
 It simply checks for an htmx request, then pulls out the ``_validate_field`` parameter to decide which field to render and return.
 
-The ``_build_validation_form`` utility deals with some corner cases for us, and the ``render_single_field_row`` utility is pretty simple – see the `full code for the details <./code/htmx_patterns/form_utils.py>`_
+The ``render_single_field_row`` utility is pretty simple – see the `full code for the details <./code/htmx_patterns/form_utils.py>`_
 
 That’s it we’re done – the validation will trigger as soon as a field is changed, and display server-side validation in the form:
 

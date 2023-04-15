@@ -5,10 +5,10 @@
   {% endwith %}
   id="form-row-{{ field.name }}"
   {% if do_htmx_validation and field|widget_type != "fileinput" %}
-    hx-post="."
+    hx-get="."
     hx-vals='{"_validate_field": "{{ field.name }}" }'
     hx-trigger="change from:#form-row-{{ field.name }}"
-    hx-params="{{ field.name }},_validate_field"
+    hx-include="#form-row-{{ field.name }}"
     hx-target="this"
     hx-swap="outerHTML"
   {% endif %}

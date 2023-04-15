@@ -14,6 +14,8 @@ from ..models import Monster
 class CreateMonsterForm(BulmaFormMixin, ModelForm):
     date_of_birth = DateField(initial=None, widget=DateInput(attrs={"type": "date"}))
 
+    do_htmx_validation = True
+
     class Meta:
         model = Monster
         fields = ["name", "is_happy", "date_of_birth", "type"]
