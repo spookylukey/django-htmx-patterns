@@ -29,8 +29,11 @@ But we don’t want to give up anything Django has given us! No compromise on UX
 
 So let’s go!
 
-But first
----------
+.. contents::
+
+
+But first…
+----------
 
 Actually before we start, ask yourself “Do I really need this?”. HTML5 already provides lots of `form validation features <https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation>`_. In Django and you can emit these attributes by:
 
@@ -43,7 +46,7 @@ If you can lean on HTML, do so! If you need additional server-side validation an
 Form HTML and styling
 ---------------------
 
-Rather than focus on just the htmx/Django techniques, I’m doing a fuller example, partly because real-world concerns often affect the solution. In particular, styling of a form normally affects the HTML, and that affects how we can break it up in order to update fragments via htmx, so you actually need to start with styling and form layout. If you just want to the htmx details, skip down to the “htmx it!” heading.
+Rather than focus on just the htmx/Django techniques, I’m doing a fuller example, partly because real-world concerns often affect the solution. In particular, styling of a form normally affects the HTML, and that affects how we can break it up in order to update fragments via htmx, so you actually need to start with styling and form layout. If you just want to the htmx details, skip down to the `htmx it! <htmx_it_>`_ section.
 
 I’ll include some of the main things you’ll need on this page, with some brief notes for the techniques used. For full details the code is available in the `code folder <./code/>`_ as always.
 
@@ -306,6 +309,9 @@ And the template achieves our aim of being able to do just ``{{ form }}`` for re
 Result:
 
 .. image:: images/bulma_form.png
+
+
+.. _htmx_it:
 
 htmx it!
 --------
