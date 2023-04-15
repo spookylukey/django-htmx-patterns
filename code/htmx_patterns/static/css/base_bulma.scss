@@ -11,9 +11,9 @@ main {
 }
 
 // Avoid overriding lots of widget templates to add Bulma classes, by instead
-// using to apply Bulma classes contextually using @extend. We could also use
-// Sass mixins for this, but this technique works even if we just have the
-// generated Bulma CSS (renamed to SCSS).
+// applying Bulma classes contextually using @extend. We could also use
+// Bulma-provided Sass mixins for this, but this technique works even if we only
+// have the generated CSS (renamed to SCSS).
 
 .field-label label {
     @extend .label;
@@ -36,7 +36,6 @@ main {
 ul.errorlist {
     @extend .has-text-danger;
     &.nonfield {
-        // Un-reset what Bulma removed
         list-style: inside disc;
         margin: 1em 0em;
     }
