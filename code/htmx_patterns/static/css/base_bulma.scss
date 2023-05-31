@@ -33,12 +33,16 @@ main {
     }
 }
 
-ul.errorlist {
+.field ul.errorlist {
     @extend .has-text-danger;
-    &.nonfield {
-        list-style: inside disc;
-        margin: 1em 0em;
-    }
+}
+
+ul.errorlist.nonfield {
+    @extend .notification;
+    @extend .is-danger;
+    @extend .is-light;
+    list-style: inside disc;
+    margin: 1em 0em;
 }
 
 
