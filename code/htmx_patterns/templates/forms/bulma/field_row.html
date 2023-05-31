@@ -7,7 +7,11 @@
   {% if do_htmx_validation and field|widget_type != "fileinput" %}
     hx-get="."
     hx-vals='{"_validate_field": "{{ field.name }}" }'
-    hx-trigger="change from:#form-row-{{ field.name }}"
+    {% if field|widget_type == "select" %}
+      hx-trigger="change from:#form-row-{{ field.name }}"
+    {% else %}
+      hx-trigger="focusout from:#form-row-{{ field.name }}"
+    {% endif %}
     hx-include="#form-row-{{ field.name }}"
     hx-target="this"
     hx-swap="outerHTML"

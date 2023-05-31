@@ -343,7 +343,11 @@ We then need to add an ID to the outer ``<div>`` in this partial so that we can 
      {% if do_htmx_validation and field|widget_type != "fileinput" %}
        hx-get="."
        hx-vals='{"_validate_field": "{{ field.name }}" }'
-       hx-trigger="change from:#form-row-{{ field.name }}"
+       {% if field|widget_type == "select" %}
+         hx-trigger="change from:#form-row-{{ field.name }}"
+       {% else %}
+         hx-trigger="focusout from:#form-row-{{ field.name }}"
+       {% endif %}
        hx-include="#form-row-{{ field.name }}"
        hx-target="this"
        hx-swap="outerHTML"
@@ -359,7 +363,7 @@ To break that down:
 - We’re doing a GET to avoid the possibility of our form being submitted i.e. we are retrieving form validation errors, not submitting a change.
 - We’re making a request to the same URL (we’ll fix up the view code shortly).
 - We’re adding a special input ``_validate_field`` which tells the server which field to validate. This is needed because of corner cases like checkboxes which return no data when they are not selected.
-- We want this htmx request to be triggered on any field change from the div we’re in.
+- We want this htmx request to be triggered on any field change from the div we’re in. For some widgets, like ``<select>``, it is safe to do this on a ``change`` event. However, for others, like ``<input type="date">``, the change event will fire when the user is still typing, and we will 1) trigger validation far too early and 2) risk erasing what the user was writing with the replaced element from the server. So we wait until the user has finished with the field, indicated by the ``focusout`` event (like the ``blur`` event, but it bubbles, which is what we need).
 - In the request GET data, we want to include data only from the current field (there is no point sending and processing other fields, especially not file uploads etc.)
 - We’re going to swap out the current div with the new one returned by the server.
 

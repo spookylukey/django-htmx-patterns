@@ -34,7 +34,6 @@ class Monster(models.Model):
     type = models.CharField(
         max_length=50,
         choices=MonsterType.choices,
-        default=MonsterType.HUMANOID,
         help_text="Don't complain about the lack of choices",
     )
 
