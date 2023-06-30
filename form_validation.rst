@@ -17,7 +17,7 @@ But now we want some htmx goodness, so that either:
 
 - the submit button will do a server call without leaving the page, updating the form inline
 
-- or, as the user types, we validate each field they change one by one, so that they don’t have to wait until the end to see problems with the form.
+- or, as the user is filling out the form, we validate each field they change one by one, so that they don’t have to wait until the end to see problems with the form.
 
 The first of these is fairly standard htmx that you can do with the techniques
 shown already; the second has more moving parts, and is what this page deals
