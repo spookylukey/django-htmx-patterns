@@ -1,6 +1,10 @@
 Approach
 ========
 
+The assumption in this guide is that you are starting from a Django web app with
+classic, server-side rendered HTML as your architecture, with zero or minimal
+existing Javascript.
+
 The approach I recommend is:
 
 1. Read the `htmx docs <https://htmx.org/docs/>`_
