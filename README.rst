@@ -61,6 +61,9 @@ The biggest contributions in this repo are:
 
   This pattern makes a huge difference to htmx usability in Django.
 
+* `full example of field-by-field htmx form validation <./form_validation.rst>`_, while keeping Django’s Form abstraction and all its benefits.
+
+
 Requirements
 ------------
 
