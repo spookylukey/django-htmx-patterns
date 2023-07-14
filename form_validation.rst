@@ -35,7 +35,7 @@ So let’s go!
 But first…
 ----------
 
-Actually before we start, ask yourself “Do I really need this?”. HTML5 already provides lots of `form validation features <https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation>`_. In Django and you can emit these attributes by:
+Actually before we start, ask yourself “Do I really need this?”. HTML5 already provides lots of `form validation features <https://developer.mozilla.org/en-US/docs/Learn/Forms/Form_validation>`_. In Django you can emit these attributes by:
 
 - using `Field <https://docs.djangoproject.com/en/stable/ref/forms/fields/>`_ arguments like ``required`` to set the HTML ``required`` attribute.
 - choosing the right `widget <https://docs.djangoproject.com/en/stable/ref/forms/widgets/>`_ (or a custom widget),
