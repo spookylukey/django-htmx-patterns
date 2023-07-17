@@ -36,8 +36,24 @@ this in your ``base.html``:
 
 `Example template <./code/htmx_patterns/templates/base.html>`_.
 
-You can also use other bundlers like webpack etc. I usually use
-`django-compressor <https://django-compressor.readthedocs.io/en/stable/>`_.
+Bundlers
+--------
+
+You can use bundlers like webpack etc. I usually use
+`django-compressor <https://django-compressor.readthedocs.io/en/stable/>`_, so my template ends up looking like:
+
+.. code-block:: html+django
+
+  {% compress js %}
+    <script type="text/javascript" defer src="{% static "js/htmx.min.js" %}"></script>
+    <script type="text/javascript" defer src="{% static "js/mystuff.js" %}"></script>
+  {% endcompress %}
+
+
+Note the use of ``defer`` (see the `docs on script async/defer <https://html.spec.whatwg.org/multipage/scripting.html#attr-script-defer>`_). By bundling my own code with htmx, and putting it after it, I know that htmx will have loaded before my own code executes, in case I need to use the `htmx Javascript API <https://htmx.org/reference/#api>`_. In development I set `COMPRESS_ENABLED <https://django-compressor.readthedocs.io/en/latest/settings.html#django.conf.settings.COMPRESS_ENABLED>`_ to ``True``. To aid debugging, I don’t run minify filters in development, and use unminified 3rd party libs if necessary.
+
+Other
+-----
 
 You should also see the notes about `post requests <./posts.rst>`_ for things
 you might want in your base templates.
