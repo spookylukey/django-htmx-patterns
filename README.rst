@@ -108,7 +108,7 @@ Links
 
 Some other good htmx resources:
 
-* `How to create a Django form (using HTMX) in 90 seconds 🐎 <https://www.photondesigner.com/articles/submit-async-django-form-with-htmx>`_ - short, simple post (and video) showing how to start using HTMX with Django very quicky 
+* `How to create a Django form (using HTMX) in 90 seconds 🐎 <https://www.photondesigner.com/articles/submit-async-django-form-with-htmx>`_ - short, simple post (and video) showing how to start using HTMX with Django very quickly 
 * `How to use htmx in Django <https://www.mattlayman.com/blog/2021/how-to-htmx-django/>`_ - tutorial blog post
 * `django-htmx <https://github.com/adamchainz/django-htmx>`_ - utility library with helpful docs
 * `django-htmx-fun <https://github.com/guettli/django-htmx-fun>`_ - example application with Django/htmx
