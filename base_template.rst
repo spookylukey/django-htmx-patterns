@@ -14,7 +14,7 @@ Using the CDN:
 
    <html>
      <head>
-       <script defer src="https://unpkg.com/htmx.org@1.8.0" integrity="sha384-cZuAZ+ZbwkNRnrKi05G/fjBX+azI9DNOkNYysZ0I/X5ZFgsmMiBXgDZof30F5ofc" crossorigin="anonymous"></script>
+       <script defer src="https://unpkg.com/htmx.org@1.9.4" integrity="sha384-zUfuhFKKZCbHTY6aRR46gxiqszMk5tcHjsVFxnUo8VMus4kHGVdIYVbOYYNlKmHV" crossorigin="anonymous"></script>
        ...
 
 
@@ -33,6 +33,7 @@ this in your ``base.html``:
      <head>
        <script defer src="{% static 'js/htmx.min.js' %}"></script>
 
+I normally include the version number in the file name when I do this.
 
 `Example template <./code/htmx_patterns/templates/base.html>`_.
 

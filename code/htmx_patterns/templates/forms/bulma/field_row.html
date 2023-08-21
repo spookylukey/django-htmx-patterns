@@ -4,17 +4,15 @@
   {% with classes=field.css_classes %} class="field is-horizontal {{ classes }}"
   {% endwith %}
   id="form-row-{{ field.name }}"
-  {% if do_htmx_validation and field|widget_type != "fileinput" %}
+  {% if do_htmx_validation and field|widget_type != "fileinput" and field|widget_type != "checkboxinput" %}
+
     hx-get="."
     hx-vals='{"_validate_field": "{{ field.name }}" }'
-    {% if field|widget_type == "select" %}
-      hx-trigger="change from:#form-row-{{ field.name }}"
-    {% else %}
-      hx-trigger="focusout from:#form-row-{{ field.name }}"
-    {% endif %}
+    hx-trigger="focusout from:#form-row-{{ field.name }}"
     hx-include="#form-row-{{ field.name }}"
     hx-target="this"
-    hx-swap="outerHTML"
+    hx-ext="morph"
+    hx-swap="morph:outerHTML"
   {% endif %}
 >
   {% if field.label %}
@@ -28,10 +26,10 @@
         <div class="control">
           {% if field|widget_type == "select" %}
             <div class="select {{ error_class }}">
-              {{ field }}
+              {{ field|attr:"hx-preserve:true" }}
             </div>
           {% else %}
-            {{ field|add_class:error_class }}
+            {{ field|add_class:error_class|attr:"hx-preserve:true" }}
           {% endif %}
         </div>
         {% if field.help_text %}
