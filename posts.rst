@@ -40,7 +40,7 @@ use controls that wouldn’t normally submit other values, such as links. An eas
 solution is to put the token into custom htmx headers, by adding ``hx-headers``
 into the ``<body>`` element, usually in a ``base.html`` template:
 
-.. code-block::
+.. code-block:: html+django
 
    <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 
@@ -48,6 +48,14 @@ into the ``<body>`` element, usually in a ``base.html`` template:
 Example `view code <./code/htmx_patterns/views/posts.py>`_, `template
 <./code/htmx_patterns/templates/post_without_form.html>`__, `base template
 <./code/htmx_patterns/templates/base.html>`_
+
+If it is awkward to put this into the ``<body>`` element in a base template (because you are using a base template that you can’t modify, for example), another technique that works is to add a ``<script>`` somewhere in an overridden base template to set the ``hx-headers`` attribute using Javascript, like this:
+
+.. code-block:: html+django
+
+  <script>
+    document.body.setAttribute('hx-headers', '{"X-CSRFToken": "{{ csrf_token }}"}');
+  </script>
 
 There are other options, like hooking into `htmx:beforeRequest
 <https://htmx.org/events/#htmx:beforeRequest>`_ and adding Javascript code
