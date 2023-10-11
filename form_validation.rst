@@ -50,7 +50,7 @@ In addition, getting field/form handling correct can be very tricky, especially 
 
 - We must never overwrite what the user has inputted with some earlier state or blank state (obvious, but easy to get wrong)
 - We mustn’t interrupt the user or start showing validation errors while they are still entering data, that’s really annoying. If we do provide feedback while typing, we must be doubly careful not to change the entered data or focus in any way.
-- If we trying to provide early feedback, we need to do so as soon as the user is “finished” with a field. But detecting that is hard, and its different for different field types e.g. as soon as they have toggled a checkbox they may expect feedback, even though the focus is still on the control.
+- Since we are trying to provide early feedback, we need to do so as soon as the user is “finished” with a field. But detecting that is hard, and it’s different for different field types e.g. as soon as they have toggled a checkbox they may expect feedback, even though the focus is still on the control.
 - We mustn’t break keyboard navigation (via tab), change the way focus works, or change keyboard manipulation of controls (e.g. space to toggle a checkbox, space/arrow keys/typing to change a select).
 - We need to handle weird cases relating to focus like checkboxes which can be changed by clicking on their ``<label>``, which may not leave the focus on the checkbox.
 - We must work correctly for mobile, where keyboard input is quite different.
@@ -66,7 +66,7 @@ But if you are still determined, read on.
 Form HTML and styling
 ---------------------
 
-Rather than focus on just the htmx/Django techniques, I’m doing a fuller example, partly because real-world concerns often affect the solution. In particular, styling of a form normally affects the HTML, and that affects how we can break it up in order to update fragments via htmx, so you actually need to start with styling and form layout. If you just want to the htmx details, skip down to the `htmx it! <htmx_it_>`_ section.
+Rather than focus on just the htmx/Django techniques, I’m doing a fuller example, partly because real-world concerns often affect the solution. In particular, styling of a form normally affects the HTML, and that affects how we can break it up in order to update fragments via htmx, so you actually need to start with styling and form layout. If you just want the htmx details, skip down to the `htmx it! <htmx_it_>`_ section.
 
 I’ll include some of the main things you’ll need on this page, with some brief notes for the techniques used. For full details the code is available in the `code folder <./code/>`_ as always.
 
@@ -399,14 +399,14 @@ To break all that down:
 
   - the flag is true
   - and if we’re not doing a file upload widget (which would not end well with files being repeatedly uploaded)
-  - and if we’re not doing a checkbox. Due to the way that clicking a label triggers a change event and a focsout event, I haven’t found a way of enabling validation of checkboxes that doesn’t break in some way (see the “trickiness” section above). However, validating checkboxes is usually not useful, especially since we are validating only one field at a time. If you have a checkbox that must be ticked, use the `required attribute <https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/required>`_.
+  - and if we’re not doing a checkbox. Due to the way that clicking a label triggers a change event and a focusout event, I haven’t found a way of enabling validation of checkboxes that doesn’t break in some way (see the “trickiness” section above). However, validating checkboxes is usually not useful, especially since we are validating only one field at a time. If you have a checkbox that must be ticked, use the `required attribute <https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes/required>`_.
 
 - We’re doing a GET to avoid the possibility of our form being submitted i.e. we are retrieving form validation errors, not submitting a change.
 - We’re making a request to the same URL (we’ll fix up the view code shortly).
 - We’re adding a special input ``_validate_field`` which tells the server which field to validate.
 - We want this htmx request to be triggered on any field change from the div we’re in. For some inputs, like ``<input type="date">``, the ``change`` event will fire when the user is still typing, and we will trigger validation far too early. We want to avoid interrupting the user while they are still entering data, especially if displaying validation errors will make the page move. So we wait until the user has finished with the field, indicated by the ``focusout`` event (like the ``blur`` event, but it bubbles, which is what we need).
 - In the request GET data, we want to include data only from the current field (there is no point sending and processing other fields, especially not file uploads etc.)
-- We’re want to swap out the current div with the new one returned by the server.
+- We want to swap out the current div with the new one returned by the server.
 
   - But, we want to ensure that we don’t change any of the actual input widgets, to avoid the possibility of overwriting user data with a response from the server. **This is important** since there is a real possibility of this happening — for example if some responses from the server took a long time to arrive and so were applied after the user had made further changes to a field. So we add the `hx-preserve attribute <https://htmx.org/attributes/hx-preserve/>`_ to implement this, using the ``attr`` filter from ``django-widget-tweaks``.
   - In addition we’ve enabled the ``idiomorph`` extension, and used the ``morph:outerHTML`` method. This is the best available method for merging in changes without disturbing the DOM, and it can make a difference in cases like this.
