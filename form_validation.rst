@@ -185,7 +185,7 @@ We can then use this in a form like:
 Form templates
 ~~~~~~~~~~~~~~
 
-We can use the builtin `django/forms/div.html <https://github.com/django/django/blob/main/django/forms/templates/django/forms/div.html>`_ template as a starting point for our main form template. We need to make a bunch of changes to fit the HTML to what Bulma expects. So far it looks like this:
+We can use the builtin `django/forms/div.html <https://github.com/django/django/blob/main/django/forms/templates/django/forms/div.html>`_ template as a starting point for our main form template. We need to make a bunch of changes to fit the HTML to what `Bulma expects <https://bulma.io/documentation/form/>`_. So far it looks like this:
 
 .. code-block:: html+django
 
