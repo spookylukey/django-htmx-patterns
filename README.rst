@@ -63,6 +63,8 @@ The biggest contributions in this repo are:
 
 * `full example of field-by-field htmx form validation <./form_validation.rst>`_, while keeping Django’s Form abstraction and all its benefits.
 
+* `nice patterns for doing modals <./modals.rst>`_
+
 
 Requirements
 ------------

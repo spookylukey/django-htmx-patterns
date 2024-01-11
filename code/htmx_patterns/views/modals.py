@@ -14,7 +14,7 @@ def main(request: HttpRequest):
         request,
         "modals_main.html",
         {
-            "monsters": Monster.objects.all(),
+            "monsters": Monster.objects.all().order_by("name"),
         },
     )
 

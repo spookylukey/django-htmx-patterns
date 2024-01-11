@@ -12,8 +12,11 @@ considers the case where the modal includes a form that may itself need server
 round-trips before it closes.
 
 Our example will be a page that lists monsters. We then want a button that will
-load a dialog for adding a new monster. The HTML looks like this:
+load a dialog for adding a new monster. This dialog will post back to and endpoint that will do validation. On success we will close the dialog and also refresh part of the parent page so it shows the new item.
 
+.. image:: images/htmx_modals.mp4
+
+The HTML looks like this:
 
 .. code-block:: html
 
