@@ -20,7 +20,7 @@ of the parent page so it shows the new item. The interaction looks like this:
 
    <video src="https://github.com/spookylukey/django-htmx-patterns/assets/62745/4030d635-dad8-48cf-965e-f9a1f6c8dbbf" width=180 ></video>
 
-The HTML looks like this:
+The HTML for the “Add a monster” button looks like this:
 
 .. code-block:: html
 
@@ -34,16 +34,17 @@ The HTML looks like this:
    </button>
 
 
-It loads the new HTML at the end of the body. We need to ensure that this
-content doesn’t get displayed, but in this example we are going to lean heavily
-on ``<dialog>`` (see `MDN docs for dialog
+It loads the new HTML (for the dialog) at the end of the body. We need to ensure
+that this content gets displayed at the right point, but in this example we are
+going to lean heavily on ``<dialog>`` (see `MDN docs for dialog
 <https://developer.mozilla.org/en-US/docs/Web/HTML/Element/dialog>`_), which
 thankfully has the desired behaviour of being invisible by default, and also
 `has reached the level of support where it is probably your best option
 <https://www.scottohara.me/blog/2023/01/26/use-the-dialog-element.html>`_.
 
-Our dialog view code is going to be based on the standard “create form” flow you’ll
-recognise, with a few changes, which I’ll show a bit later.
+Our view code for returning the dialog is going to be based on the
+standard “create form” flow you’ll recognise, with a few changes, which I’ll
+show a bit later.
 
 The template needs a ``<dialog>``, and also a ``<form>`` that will post back to
 the same view via htmx, replacing the whole contents, using our normal `inline
