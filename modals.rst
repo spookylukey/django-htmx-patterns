@@ -12,9 +12,13 @@ considers the case where the modal includes a form that may itself need server
 round-trips before it closes.
 
 Our example will be a page that lists monsters. We then want a button that will
-load a dialog for adding a new monster. This dialog will post back to and endpoint that will do validation. On success we will close the dialog and also refresh part of the parent page so it shows the new item.
+load a dialog for adding a new monster. This dialog will post back to and endpoint
+that will do validation. On success we will close the dialog and also refresh part
+of the parent page so it shows the new item. The interaction looks like this:
 
-.. image:: images/htmx_modals.mp4
+.. raw:: html
+
+   <video src="https://github.com/spookylukey/django-htmx-patterns/assets/62745/4030d635-dad8-48cf-965e-f9a1f6c8dbbf" width=180 ></video>
 
 The HTML looks like this:
 
