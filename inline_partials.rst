@@ -1,6 +1,15 @@
 Inline partials
 ===============
 
+.. note::
+
+   Django 6.0 now has built-in support for `Template partials
+   <https://docs.djangoproject.com/en/6.0/ref/templates/language/#template-partials>`_!
+   The patterns below can almost certainly be improved and simplified, without
+   needing the external ``django-render-block`` library, but I haven’t had time
+   to do so yet.
+
+
 Also known as `“template fragments”
 <https://htmx.org/essays/template-fragments/>`_.
 
