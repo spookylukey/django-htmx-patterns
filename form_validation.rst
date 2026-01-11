@@ -58,6 +58,10 @@ In addition, getting field/form handling correct can be very tricky, especially 
 
 **Earlier versions of these docs had subtle bugs with all the above!**
 
+**And this version still has potential bugs!**
+
+Specifically, I’ve found that the ``delay:50ms`` technique can be sensitive to timing. ``delay:1ms`` is not enough on some computers, so this isn’t robust.
+
 If you need to provide early feedback, there may be better alternatives, like splitting up a long form into multiple parts that are checked individually.
 
 But if you are still determined, read on.
@@ -368,7 +372,7 @@ We then need to add an ID to the outer ``<div>`` in this partial so that we can 
      {% if do_htmx_validation and field|widget_type != "fileinput" and field|widget_type != "checkboxinput" %}
        hx-get="."
        hx-vals='{"_validate_field": "{{ field.name }}" }'
-       hx-trigger="focusout from:#form-row-{{ field.name }}"
+       hx-trigger="focusout delay:50ms from:#form-row-{{ field.name }}"
        hx-include="#form-row-{{ field.name }}"
        hx-target="this"
        hx-ext="morph"
@@ -405,13 +409,14 @@ To break all that down:
 - We’re making a request to the same URL (we’ll fix up the view code shortly).
 - We’re adding a special input ``_validate_field`` which tells the server which field to validate.
 - We want this htmx request to be triggered on any field change from the div we’re in. For some inputs, like ``<input type="date">``, the ``change`` event will fire when the user is still typing, and we will trigger validation far too early. We want to avoid interrupting the user while they are still entering data, especially if displaying validation errors will make the page move. So we wait until the user has finished with the field, indicated by the ``focusout`` event (like the ``blur`` event, but it bubbles, which is what we need).
+  - We add a delay of 50ms to give the value of the control time to update. The ``focusout`` event happens before the ``change`` event, so in some cases you can see the earlier value of the control without this. It might be that 50ms is not enough on some machines, **so this is not robust**.
 - In the request GET data, we want to include data only from the current field (there is no point sending and processing other fields, especially not file uploads etc.)
 - We want to swap out the current div with the new one returned by the server.
 
   - But, we want to ensure that we don’t change any of the actual input widgets, to avoid the possibility of overwriting user data with a response from the server. **This is important** since there is a real possibility of this happening — for example if some responses from the server took a long time to arrive and so were applied after the user had made further changes to a field. So we add the `hx-preserve attribute <https://htmx.org/attributes/hx-preserve/>`_ to implement this, using the ``attr`` filter from ``django-widget-tweaks``.
   - In addition we’ve enabled the ``idiomorph`` extension, and used the ``morph:outerHTML`` method. This is the best available method for merging in changes without disturbing the DOM, and it can make a difference in cases like this.
 
-If you are using the same form templates in situations where you do want to overwrite fields with server provided data, you will need to ensure that the ``hx-preserve`` is added only conditionally.
+The use of ``hx-preserve`` is not compatible with some other htmx usages where you do want to overwrite fields with server provided data. See `hx-preserve docs <https://htmx.org/attributes/hx-preserve/>`_.
 
 Fix up the form renderer and mixin
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
